@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-cli-mcp/03-04-PLAN.md
-last_updated: "2026-03-28T17:01:38.861Z"
+stopped_at: Completed 04-quality-hardening/04-01-PLAN.md
+last_updated: "2026-03-28T17:47:47.887Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 14
-  completed_plans: 14
+  total_plans: 17
+  completed_plans: 15
   percent: 20
 ---
 
@@ -64,6 +64,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 03-cli-mcp PP03 | 526025min | 1 tasks | 2 files |
 | Phase 03-cli-mcp P02 | 6 | 3 tasks | 4 files |
 | Phase 03-cli-mcp P04 | 3 | 2 tasks | 2 files |
+| Phase 04-quality-hardening P01 | 2 | 2 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,8 @@ Recent decisions affecting current work:
 - [Phase 03-cli-mcp]: CallToolResult return type: handlers return SDK's CallToolResult type not custom interface — required for TypeScript overload resolution with server.tool()
 - [Phase 03-cli-mcp]: MCP Client + InMemoryTransport used for schema size test: gives exact JSON Schema MCP clients see
 - [Phase 03-cli-mcp]: child_process.spawn for CLI subprocess tests: byte-accurate stream separation, FORCE_COLOR=0 to suppress ANSI
+- [Phase 04-quality-hardening]: createGraftServer returns McpServer without transport — Option B from research; zero production API change
+- [Phase 04-quality-hardening]: Mixed-project fixture uses two separate clusters (TS + Python) to assert no cross-language edges per research pitfall 5
 
 ### Pending Todos
 
@@ -119,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T16:57:55.051Z
-Stopped at: Completed 03-cli-mcp/03-04-PLAN.md
+Last session: 2026-03-28T17:47:47.884Z
+Stopped at: Completed 04-quality-hardening/04-01-PLAN.md
 Resume file: None
