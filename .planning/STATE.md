@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-cli-mcp/03-01-PLAN.md
-last_updated: "2026-03-28T16:44:09.771Z"
+stopped_at: Completed 03-cli-mcp/03-02-PLAN.md
+last_updated: "2026-03-28T16:52:44.008Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 14
-  completed_plans: 11
+  completed_plans: 13
   percent: 20
 ---
 
@@ -61,6 +61,8 @@ Progress: [██░░░░░░░░] 20%
 | Phase 02-graph-renderer P04 | 2 | 1 tasks | 3 files |
 | Phase 02-graph-renderer P03 | 4 | 2 tasks | 7 files |
 | Phase 03-cli-mcp P01 | 8 | 3 tasks | 4 files |
+| Phase 03-cli-mcp PP03 | 526025min | 1 tasks | 2 files |
+| Phase 03-cli-mcp P02 | 6 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -98,6 +100,10 @@ Recent decisions affecting current work:
 - [Phase 03-cli-mcp]: chalk pinned to v4.x (not v5+): v5+ is ESM-only, breaks CJS bundle
 - [Phase 03-cli-mcp]: ora pinned to v5.x (not v6+): v6+ is ESM-only, breaks CJS bundle
 - [Phase 03-cli-mcp]: buildIndex returns all four fields (graph, scores, files, results): downstream consumers need full access to each stage output
+- [Phase 03-cli-mcp]: require() for package.json version: resolves correctly in both Vitest test context (src/cli/) and CJS dist output (dist/)
+- [Phase 03-cli-mcp]: Dynamic import of startMcpServer in serve action: defers MCP SDK loading to serve-only code path
+- [Phase 03-cli-mcp]: Handler extraction for testability: each tool logic extracted to named async fn exported for unit testing — McpServer registration wraps them
+- [Phase 03-cli-mcp]: CallToolResult return type: handlers return SDK's CallToolResult type not custom interface — required for TypeScript overload resolution with server.tool()
 
 ### Pending Todos
 
@@ -110,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T16:44:09.768Z
-Stopped at: Completed 03-cli-mcp/03-01-PLAN.md
+Last session: 2026-03-28T16:52:44.006Z
+Stopped at: Completed 03-cli-mcp/03-02-PLAN.md
 Resume file: None

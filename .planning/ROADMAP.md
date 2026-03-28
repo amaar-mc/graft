@@ -95,5 +95,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + Parser | 6/6 | Complete   | 2026-03-28 |
 | 2. Graph + Renderer | 4/4 | Complete   | 2026-03-28 |
-| 3. CLI + MCP | 0/4 | Not started | - |
+| 3. CLI + MCP | 3/4 | In Progress|  |
 | 4. Quality + Hardening | 0/TBD | Not started | - |

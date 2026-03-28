@@ -35,25 +35,25 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### MCP Server
 
-- [ ] **MCP-01**: Implement MCP server using @modelcontextprotocol/sdk with stdio transport
-- [ ] **MCP-02**: Expose `graft_map` tool — ranked tree map with optional `query` param for personalization and `budget` param for token limit
-- [ ] **MCP-03**: Expose `graft_context` tool — given a file path or symbol name, return the relevant subgraph (dependencies + reverse dependencies + sibling definitions)
-- [ ] **MCP-04**: Expose `graft_search` tool — structural search by definition name, kind, or pattern against the indexed graph
-- [ ] **MCP-05**: Expose `graft_impact` tool — return transitive reverse-dependency closure for a given file or symbol
-- [ ] **MCP-06**: Expose `graft_summary` tool — project overview with top-level modules, entry points, key abstractions, and detected tech stack
-- [ ] **MCP-07**: Expose `graft://map` MCP resource — the full ranked tree map
-- [ ] **MCP-08**: Expose `graft://file/{path}` MCP resource — contextual view of a specific file with its relationships
+- [x] **MCP-01**: Implement MCP server using @modelcontextprotocol/sdk with stdio transport
+- [x] **MCP-02**: Expose `graft_map` tool — ranked tree map with optional `query` param for personalization and `budget` param for token limit
+- [x] **MCP-03**: Expose `graft_context` tool — given a file path or symbol name, return the relevant subgraph (dependencies + reverse dependencies + sibling definitions)
+- [x] **MCP-04**: Expose `graft_search` tool — structural search by definition name, kind, or pattern against the indexed graph
+- [x] **MCP-05**: Expose `graft_impact` tool — return transitive reverse-dependency closure for a given file or symbol
+- [x] **MCP-06**: Expose `graft_summary` tool — project overview with top-level modules, entry points, key abstractions, and detected tech stack
+- [x] **MCP-07**: Expose `graft://map` MCP resource — the full ranked tree map
+- [x] **MCP-08**: Expose `graft://file/{path}` MCP resource — contextual view of a specific file with its relationships
 - [ ] **MCP-09**: Keep total MCP tool schema serialization under 4,000 characters to minimize token overhead
 
 ### CLI
 
-- [ ] **CLI-01**: `graft serve` command starts the MCP server over stdio
-- [ ] **CLI-02**: `graft map` command outputs the ranked tree map to stdout with optional `--focus` flag for file-specific personalization
-- [ ] **CLI-03**: `graft stats` command displays indexing statistics (file count, definition count, edge count, cache age)
-- [ ] **CLI-04**: `graft impact <path>` command shows what files would be affected by changing the given file
-- [ ] **CLI-05**: `graft search <query>` command finds definitions by name with optional `--kind` filter
+- [x] **CLI-01**: `graft serve` command starts the MCP server over stdio
+- [x] **CLI-02**: `graft map` command outputs the ranked tree map to stdout with optional `--focus` flag for file-specific personalization
+- [x] **CLI-03**: `graft stats` command displays indexing statistics (file count, definition count, edge count, cache age)
+- [x] **CLI-04**: `graft impact <path>` command shows what files would be affected by changing the given file
+- [x] **CLI-05**: `graft search <query>` command finds definitions by name with optional `--kind` filter
 - [x] **CLI-06**: Beautiful terminal output with colors (chalk), tree-drawing characters, and progress spinners (ora)
-- [ ] **CLI-07**: Default command (`npx graft` with no args) indexes current directory and starts MCP server
+- [x] **CLI-07**: Default command (`npx graft` with no args) indexes current directory and starts MCP server
 
 ### Infrastructure
 
@@ -136,22 +136,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REND-03 | Phase 2 | Complete |
 | REND-04 | Phase 2 | Complete |
 | REND-05 | Phase 2 | Complete |
-| MCP-01 | Phase 3 | Pending |
-| MCP-02 | Phase 3 | Pending |
-| MCP-03 | Phase 3 | Pending |
-| MCP-04 | Phase 3 | Pending |
-| MCP-05 | Phase 3 | Pending |
-| MCP-06 | Phase 3 | Pending |
-| MCP-07 | Phase 3 | Pending |
-| MCP-08 | Phase 3 | Pending |
+| MCP-01 | Phase 3 | Complete |
+| MCP-02 | Phase 3 | Complete |
+| MCP-03 | Phase 3 | Complete |
+| MCP-04 | Phase 3 | Complete |
+| MCP-05 | Phase 3 | Complete |
+| MCP-06 | Phase 3 | Complete |
+| MCP-07 | Phase 3 | Complete |
+| MCP-08 | Phase 3 | Complete |
 | MCP-09 | Phase 3 | Pending |
-| CLI-01 | Phase 3 | Pending |
-| CLI-02 | Phase 3 | Pending |
-| CLI-03 | Phase 3 | Pending |
-| CLI-04 | Phase 3 | Pending |
-| CLI-05 | Phase 3 | Pending |
+| CLI-01 | Phase 3 | Complete |
+| CLI-02 | Phase 3 | Complete |
+| CLI-03 | Phase 3 | Complete |
+| CLI-04 | Phase 3 | Complete |
+| CLI-05 | Phase 3 | Complete |
 | CLI-06 | Phase 3 | Complete |
-| CLI-07 | Phase 3 | Pending |
+| CLI-07 | Phase 3 | Complete |
 | INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 2 | Complete |
