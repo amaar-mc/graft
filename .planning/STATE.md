@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-parser/01-04-PLAN.md
-last_updated: "2026-03-28T07:47:58.379Z"
+stopped_at: Completed 01-foundation-parser/01-06-PLAN.md
+last_updated: "2026-03-28T08:00:38.249Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 6
+  completed_plans: 6
   percent: 20
 ---
 
@@ -55,6 +55,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 01-foundation-parser P03 | 5 | 4 tasks | 4 files |
 | Phase 01-foundation-parser P05 | 2 | 1 tasks | 1 files |
 | Phase 01-foundation-parser P04 | 5 | 3 tasks | 5 files |
+| Phase 01-foundation-parser P06 | 1 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,7 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-parser]: Python methods emit 'method' kind via upsertNode override with insideClass tracking — tags.scm Python grammar has no definition.method, AST walk must override Phase 1 results
 - [Phase 01-foundation-parser]: import_from_statement uses module_name field text directly for module path — relative_import node already contains complete path string
 - [Phase 01-foundation-parser]: Python imported names collected via dotted_name namedChildren (not identifier type) — matches actual tree-sitter Python grammar structure
+- [Phase 01-foundation-parser]: Format:check wired into CI after Lint, before Test — early fail on cheap checks before expensive test runs
 
 ### Pending Todos
 
@@ -91,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T07:47:58.376Z
-Stopped at: Completed 01-foundation-parser/01-04-PLAN.md
+Last session: 2026-03-28T08:00:38.247Z
+Stopped at: Completed 01-foundation-parser/01-06-PLAN.md
 Resume file: None
