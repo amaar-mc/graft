@@ -30,11 +30,7 @@ class DiscoveryError extends GraftError {
 
 class GrammarLoadError extends GraftError {
   constructor(message: string, hint: string) {
-    super(
-      message,
-      hint,
-      'GRAMMAR_LOAD_ERROR',
-    );
+    super(message, hint, 'GRAMMAR_LOAD_ERROR');
     this.name = 'GrammarLoadError';
   }
 }
