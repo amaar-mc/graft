@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-graph-renderer/02-03-PLAN.md
-last_updated: "2026-03-28T08:40:15.268Z"
+stopped_at: Completed 03-cli-mcp/03-01-PLAN.md
+last_updated: "2026-03-28T16:44:09.771Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 14
+  completed_plans: 11
   percent: 20
 ---
 
@@ -60,6 +60,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 02-graph-renderer P01 | 4 | 2 tasks | 5 files |
 | Phase 02-graph-renderer P04 | 2 | 1 tasks | 3 files |
 | Phase 02-graph-renderer P03 | 4 | 2 tasks | 7 files |
+| Phase 03-cli-mcp P01 | 8 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,9 @@ Recent decisions affecting current work:
 - [Phase 02-graph-renderer]: transitiveClosure always includes seed file itself — callers never need special-case unknown handling
 - [Phase 02-graph-renderer]: Budget enforcement breaks at first overflow block — partial blocks never emitted, output is always coherent
 - [Phase 02-graph-renderer]: tokenCount in JSON computed from preliminary serialization — approximation avoids circular dependency
+- [Phase 03-cli-mcp]: chalk pinned to v4.x (not v5+): v5+ is ESM-only, breaks CJS bundle
+- [Phase 03-cli-mcp]: ora pinned to v5.x (not v6+): v6+ is ESM-only, breaks CJS bundle
+- [Phase 03-cli-mcp]: buildIndex returns all four fields (graph, scores, files, results): downstream consumers need full access to each stage output
 
 ### Pending Todos
 
@@ -106,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T08:35:40.666Z
-Stopped at: Completed 02-graph-renderer/02-03-PLAN.md
+Last session: 2026-03-28T16:44:09.768Z
+Stopped at: Completed 03-cli-mcp/03-01-PLAN.md
 Resume file: None

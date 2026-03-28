@@ -52,7 +52,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **CLI-03**: `graft stats` command displays indexing statistics (file count, definition count, edge count, cache age)
 - [ ] **CLI-04**: `graft impact <path>` command shows what files would be affected by changing the given file
 - [ ] **CLI-05**: `graft search <query>` command finds definitions by name with optional `--kind` filter
-- [ ] **CLI-06**: Beautiful terminal output with colors (chalk), tree-drawing characters, and progress spinners (ora)
+- [x] **CLI-06**: Beautiful terminal output with colors (chalk), tree-drawing characters, and progress spinners (ora)
 - [ ] **CLI-07**: Default command (`npx graft` with no args) indexes current directory and starts MCP server
 
 ### Infrastructure
@@ -150,7 +150,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CLI-03 | Phase 3 | Pending |
 | CLI-04 | Phase 3 | Pending |
 | CLI-05 | Phase 3 | Pending |
-| CLI-06 | Phase 3 | Pending |
+| CLI-06 | Phase 3 | Complete |
 | CLI-07 | Phase 3 | Pending |
 | INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Complete |
