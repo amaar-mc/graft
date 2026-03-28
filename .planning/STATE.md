@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-quality-hardening/04-02-PLAN.md
-last_updated: "2026-03-28T17:57:41.950Z"
+stopped_at: Completed 04-quality-hardening/04-03-PLAN.md
+last_updated: "2026-03-28T18:15:14.149Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 17
-  completed_plans: 16
+  completed_plans: 17
   percent: 20
 ---
 
@@ -66,6 +66,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 03-cli-mcp P04 | 3 | 2 tasks | 2 files |
 | Phase 04-quality-hardening P01 | 2 | 2 tasks | 13 files |
 | Phase 04-quality-hardening PP02 | 8 | 2 tasks | 6 files |
+| Phase 04-quality-hardening P03 | 24 | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -113,6 +114,9 @@ Recent decisions affecting current work:
 - [Phase 04-quality-hardening]: Mixed-project fixture uses two separate clusters (TS + Python) to assert no cross-language edges per research pitfall 5
 - [Phase 04-quality-hardening]: buildGraph reads node.name (not node.references) for import/export module paths — all parsers consistently store module path in name field
 - [Phase 04-quality-hardening]: Snapshot budget=20 tokens (charBudget=60) demonstrates truncation with fileA included but fileB excluded
+- [Phase 04-quality-hardening]: E2E MCP coverage: fixture package.json with only dependencies covers devDependencies ?? {} null branch in handleGraftSummary
+- [Phase 04-quality-hardening]: EISDIR trick used to trigger non-ENOENT cache read error — more portable than chmod for cross-platform testing
+- [Phase 04-quality-hardening]: Coverage gap tests require fixtures targeting specific grammar branches (namespace_import.ts, decorator_calls.py, advanced_imports.py)
 
 ### Pending Todos
 
@@ -125,6 +129,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T17:57:41.948Z
-Stopped at: Completed 04-quality-hardening/04-02-PLAN.md
+Last session: 2026-03-28T18:15:14.146Z
+Stopped at: Completed 04-quality-hardening/04-03-PLAN.md
 Resume file: None
