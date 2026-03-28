@@ -1,5 +1,5 @@
 {
-  "name": "graft",
+  "name": "graftmap",
   "version": "0.0.1",
   "description": "Local-first codebase context engine for AI coding tools",
   "main": "dist/index.cjs",
@@ -23,10 +23,36 @@
     "codebase",
     "context",
     "tree-sitter",
-    "ai"
+    "ai",
+    "pagerank",
+    "dependency-graph",
+    "code-analysis",
+    "model-context-protocol",
+    "ai-coding",
+    "code-intelligence",
+    "static-analysis",
+    "typescript",
+    "python",
+    "local-first"
   ],
-  "author": "",
+  "author": "Amaar Chughtai",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amaar-mc/graft.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amaar-mc/graft/issues"
+  },
+  "homepage": "https://github.com/amaar-mc/graft#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "packageManager": "pnpm@10.32.1",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0",

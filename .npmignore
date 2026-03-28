@@ -1,0 +1,26 @@
+# Source
+src/
+tests/
+coverage/
+.planning/
+.graft/
+
+# Config
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+eslint.config.ts
+.eslintrc*
+.prettierrc*
+
+# GitHub
+.github/
+.gitignore
+
+# Docs (keep README and LICENSE)
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+
+# Dev
+*.test.ts
+*.spec.ts

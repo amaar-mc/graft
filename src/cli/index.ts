@@ -61,6 +61,9 @@ export async function handleMap(
 
   const { graph, scores } = await buildIndex(rootDir, personalization);
   const tokenBudget = parseInt(options.budget, 10);
+  if (Number.isNaN(tokenBudget) || tokenBudget < 1) {
+    throw new GraftError('Invalid budget value', 'Provide a positive integer for --budget', 'INVALID_INPUT');
+  }
   const output = renderTree(graph, scores, rootDir, { tokenBudget, charsPerToken: 3 });
 
   spinner.succeed(chalk.green(`Indexed ${graph.files.size} files`));

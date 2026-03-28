@@ -18,6 +18,17 @@ import type { NodeKind } from '../parser/types.js';
 // Kinds that are structural noise, excluded from context displays
 const EXCLUDED_CONTEXT_KINDS: ReadonlySet<NodeKind> = new Set(['import', 'export']);
 
+// Validate that a resolved path stays within the project root.
+// Prevents path traversal attacks via MCP tool/resource inputs (e.g. "../../.ssh/id_rsa").
+function validateProjectPath(rootDir: string, absPath: string): string | null {
+  const normalizedRoot = path.resolve(rootDir) + path.sep;
+  const normalizedPath = path.resolve(absPath);
+  if (normalizedPath !== path.resolve(rootDir) && !normalizedPath.startsWith(normalizedRoot)) {
+    return null;
+  }
+  return normalizedPath;
+}
+
 // --- Shared context text builder used by graft_context tool and graft://file/{path} resource ---
 
 function buildFileContextText(
@@ -98,7 +109,10 @@ async function handleGraftMap(params: MapParams, rootDir: string): Promise<Conte
   let personalization: ReadonlyMap<string, number> | undefined;
 
   if (params.query !== undefined) {
-    const absPath = path.resolve(rootDir, params.query);
+    const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.query));
+    if (absPath === null) {
+      return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+    }
     personalization = new Map([[absPath, 10.0]]);
   }
 
@@ -113,7 +127,10 @@ async function handleGraftContext(
   params: PathParam,
   rootDir: string,
 ): Promise<ContentResponse> {
-  const absPath = path.resolve(rootDir, params.path);
+  const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.path));
+  if (absPath === null) {
+    return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+  }
   const { graph, scores } = await buildIndex(rootDir);
   const text = buildFileContextText(graph, scores, rootDir, absPath);
 
@@ -146,7 +163,10 @@ async function handleGraftSearch(params: SearchParams, rootDir: string): Promise
 }
 
 async function handleGraftImpact(params: PathParam, rootDir: string): Promise<ContentResponse> {
-  const absPath = path.resolve(rootDir, params.path);
+  const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.path));
+  if (absPath === null) {
+    return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+  }
   const { graph, scores } = await buildIndex(rootDir);
   const closure = transitiveClosure(graph, absPath);
 
@@ -243,7 +263,7 @@ function createGraftServer(rootDir: string): McpServer {
     'graft_map',
     'Ranked tree map of the codebase by structural importance.',
     {
-      query: z.string().optional().describe('File or symbol for personalization'),
+      query: z.string().max(500).optional().describe('File or symbol for personalization'),
       budget: z
         .number()
         .int()
@@ -260,7 +280,7 @@ function createGraftServer(rootDir: string): McpServer {
     'graft_context',
     'Dependencies and definitions for a specific file.',
     {
-      path: z.string().describe('File path relative to project root'),
+      path: z.string().max(1000).describe('File path relative to project root'),
     },
     async (params) => handleGraftContext(params, rootDir),
   );
@@ -270,8 +290,8 @@ function createGraftServer(rootDir: string): McpServer {
     'graft_search',
     'Find definitions by name or kind.',
     {
-      query: z.string().describe('Name pattern to search for'),
-      kind: z.string().optional().describe('Filter by kind: function, class, type, etc.'),
+      query: z.string().max(500).describe('Name pattern to search for'),
+      kind: z.string().max(50).optional().describe('Filter by kind: function, class, type, etc.'),
     },
     async (params) => handleGraftSearch(params, rootDir),
   );
@@ -281,7 +301,7 @@ function createGraftServer(rootDir: string): McpServer {
     'graft_impact',
     'Files affected by changing a given file.',
     {
-      path: z.string().describe('File path relative to project root'),
+      path: z.string().max(1000).describe('File path relative to project root'),
     },
     async (params) => handleGraftImpact(params, rootDir),
   );
@@ -312,7 +332,11 @@ function createGraftServer(rootDir: string): McpServer {
     new ResourceTemplate('graft://file/{path}', { list: undefined }),
     { description: 'File with its dependency relationships' },
     async (uri, { path: filePath }) => {
-      const absPath = path.resolve(rootDir, filePath as string);
+      const rawPath = Array.isArray(filePath) ? filePath[0] : filePath;
+      const absPath = validateProjectPath(rootDir, path.resolve(rootDir, rawPath as string));
+      if (absPath === null) {
+        return { contents: [{ uri: uri.href, text: 'Error: path is outside project root', mimeType: 'text/plain' }] };
+      }
       const { graph, scores } = await buildIndex(rootDir);
       const text = buildFileContextText(graph, scores, rootDir, absPath);
       return { contents: [{ uri: uri.href, text, mimeType: 'text/plain' }] };
