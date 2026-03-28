@@ -47,10 +47,11 @@ describe('buildGraph', () => {
       const fileB = '/project/src/b.ts';
       const fileC = '/project/src/c.ts';
 
+      // import/export nodes: name = module path, references = imported identifiers
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importB', 'import', ['./b'])]),
-        makeResult(fileB, [makeNode(fileB, 'importC', 'import', ['./c'])]),
-        makeResult(fileC, [makeNode(fileC, 'exportFoo', 'export', [])]),
+        makeResult(fileA, [makeNode(fileA, './b', 'import', ['foo'])]),
+        makeResult(fileB, [makeNode(fileB, './c', 'import', ['bar'])]),
+        makeResult(fileC, []),
       ];
 
       const graph = buildGraph(results);
@@ -79,11 +80,12 @@ describe('buildGraph', () => {
   describe('import resolution', () => {
     it('silently drops npm package imports with no edges created', () => {
       const fileA = '/project/src/a.ts';
+      // node.name = module path for import nodes
       const results: ParseResult[] = [
         makeResult(fileA, [
-          makeNode(fileA, 'importLodash', 'import', ['lodash']),
-          makeNode(fileA, 'importReact', 'import', ['react']),
-          makeNode(fileA, 'importBuiltin', 'import', ['node:path']),
+          makeNode(fileA, 'lodash', 'import', ['cloneDeep']),
+          makeNode(fileA, 'react', 'import', ['useState']),
+          makeNode(fileA, 'node:path', 'import', ['join']),
         ]),
       ];
 
@@ -96,7 +98,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/a.ts';
       const fileB = '/project/src/utils/b.ts';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importB', 'import', ['./utils/b'])]),
+        makeResult(fileA, [makeNode(fileA, './utils/b', 'import', ['MyClass'])]),
         makeResult(fileB, []),
       ];
 
@@ -108,7 +110,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/utils/a.ts';
       const fileB = '/project/src/b.ts';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importB', 'import', ['../b'])]),
+        makeResult(fileA, [makeNode(fileA, '../b', 'import', ['myFunc'])]),
         makeResult(fileB, []),
       ];
 
@@ -120,7 +122,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/a.ts';
       const fileIndex = '/project/src/foo/index.ts';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importFoo', 'import', ['./foo'])]),
+        makeResult(fileA, [makeNode(fileA, './foo', 'import', ['myFunc'])]),
         makeResult(fileIndex, []),
       ];
 
@@ -132,7 +134,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/a.ts';
       const fileB = '/project/src/b.tsx';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importB', 'import', ['./b'])]),
+        makeResult(fileA, [makeNode(fileA, './b', 'import', ['MyComponent'])]),
         makeResult(fileB, []),
       ];
 
@@ -146,7 +148,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/api/views.py';
       const fileB = '/project/src/api/models.py';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importModels', 'import', ['.models'])]),
+        makeResult(fileA, [makeNode(fileA, '.models', 'import', ['User'])]),
         makeResult(fileB, []),
       ];
 
@@ -158,7 +160,7 @@ describe('buildGraph', () => {
       const fileA = '/project/src/api/views.py';
       const fileB = '/project/src/core.py';
       const results: ParseResult[] = [
-        makeResult(fileA, [makeNode(fileA, 'importCore', 'import', ['..core'])]),
+        makeResult(fileA, [makeNode(fileA, '..core', 'import', ['doWork'])]),
         makeResult(fileB, []),
       ];
 
@@ -168,11 +170,11 @@ describe('buildGraph', () => {
   });
 
   describe('export nodes (barrel files)', () => {
-    it('creates edges for export kind nodes with references', () => {
+    it('creates edges for export kind nodes with module path in name', () => {
       const barrel = '/project/src/index.ts';
       const fileA = '/project/src/a.ts';
       const results: ParseResult[] = [
-        makeResult(barrel, [makeNode(barrel, 're-exportA', 'export', ['./a'])]),
+        makeResult(barrel, [makeNode(barrel, './a', 'export', ['myFunc'])]),
         makeResult(fileA, []),
       ];
 
@@ -187,8 +189,9 @@ describe('buildGraph', () => {
       const fileB = '/project/src/b.ts';
       const results: ParseResult[] = [
         makeResult(fileA, [
-          makeNode(fileA, 'import1', 'import', ['./b'], 1),
-          makeNode(fileA, 'import2', 'import', ['./b'], 5),
+          // Two separate import statements pointing to the same module — should produce one edge
+          makeNode(fileA, './b', 'import', ['foo'], 1),
+          makeNode(fileA, './b', 'import', ['bar'], 5),
         ]),
         makeResult(fileB, []),
       ];

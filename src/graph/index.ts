@@ -127,6 +127,8 @@ function buildGraph(results: readonly ParseResult[]): FileGraph {
   const knownFiles: ReadonlySet<string> = files;
 
   // Second pass: resolve import/export references and build edges.
+  // Parsers store the module path in node.name for import/export nodes.
+  // node.references holds the imported/exported identifiers (not the module path).
   for (const result of results) {
     for (const node of result.nodes) {
       // Only import and export nodes carry dependency references.
@@ -134,22 +136,21 @@ function buildGraph(results: readonly ParseResult[]): FileGraph {
         continue;
       }
 
-      for (const ref of node.references) {
-        const resolved = resolveImportPath(result.filePath, ref, knownFiles);
-        if (resolved === null) {
-          continue;
-        }
-
-        // Guard: resolved target must be in the known files set (should always be true
-        // given resolveImportPath returns null otherwise, but be defensive).
-        if (!knownFiles.has(resolved)) {
-          continue;
-        }
-
-        // Set deduplication handles duplicate imports automatically.
-        forwardEdges.get(result.filePath)!.add(resolved);
-        reverseEdges.get(resolved)!.add(result.filePath);
+      // The module path is always in node.name for import/export nodes.
+      const resolved = resolveImportPath(result.filePath, node.name, knownFiles);
+      if (resolved === null) {
+        continue;
       }
+
+      // Guard: resolved target must be in the known files set (should always be true
+      // given resolveImportPath returns null otherwise, but be defensive).
+      if (!knownFiles.has(resolved)) {
+        continue;
+      }
+
+      // Set deduplication handles duplicate imports automatically.
+      forwardEdges.get(result.filePath)!.add(resolved);
+      reverseEdges.get(resolved)!.add(result.filePath);
     }
   }
 

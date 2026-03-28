@@ -35,11 +35,12 @@ const fileC = '/project/src/c.ts';
 const fileD = '/project/src/d.ts';
 const fileUnknown = '/project/src/unknown.ts';
 
+// import node: name = module path, references = imported identifiers
 const fixtureResults: ParseResult[] = [
-  makeResult(fileA, [makeImportNode(fileA, 'importB', ['./b'])]),
-  makeResult(fileB, [makeImportNode(fileB, 'importC', ['./c'])]),
+  makeResult(fileA, [makeImportNode(fileA, './b', ['foo'])]),
+  makeResult(fileB, [makeImportNode(fileB, './c', ['bar'])]),
   makeResult(fileC, []),
-  makeResult(fileD, [makeImportNode(fileD, 'importB', ['./b'])]),
+  makeResult(fileD, [makeImportNode(fileD, './b', ['foo'])]),
 ];
 
 const graph = buildGraph(fixtureResults);
