@@ -1,15 +1,18 @@
-// Type contracts for the graph layer.
-// FileGraph is the core data structure: nodes are files, edges are import dependencies.
-// PageRank types define the scoring interface used by the renderer.
+// Type contracts for Phase 2: graph builder, PageRank, traversal, and renderers.
+// All consumers in Phase 2+ depend on these interfaces as the primary seam.
 
 import type { CodeNode } from '../parser/types.js';
 
+// Core directed file dependency graph.
+// forwardEdges[A] = set of files A imports.
+// reverseEdges[A] = set of files that import A.
 interface FileGraph {
   readonly files: ReadonlySet<string>;
   // Forward edges: file -> set of files it imports
   readonly forwardEdges: ReadonlyMap<string, ReadonlySet<string>>;
   // Reverse edges: file -> set of files that import it (for efficient in-degree access)
   readonly reverseEdges: ReadonlyMap<string, ReadonlySet<string>>;
+  // All CodeNodes keyed by file path, for downstream consumers (renderer, PageRank).
   readonly definitions: ReadonlyMap<string, readonly CodeNode[]>;
 }
 
@@ -31,4 +34,28 @@ interface PageRankResult {
   readonly converged: boolean;
 }
 
-export type { FileGraph, PageRankOptions, PageRankResult };
+// Options for the tree-style context renderer (Phase 2 plan 03).
+interface TreeRendererOptions {
+  // Maximum token budget for rendered output.
+  readonly tokenBudget: number;
+  // Estimated characters per token used to compute budget in characters.
+  readonly charsPerToken: number;
+}
+
+// Options for the JSON renderer (Phase 2 plan 03) — reserved, empty for now.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface JsonRendererOptions {}
+
+// Result type returned by forward/reverse traversal queries.
+interface TraversalResult {
+  readonly files: ReadonlySet<string>;
+}
+
+export type {
+  FileGraph,
+  PageRankOptions,
+  PageRankResult,
+  TreeRendererOptions,
+  JsonRendererOptions,
+  TraversalResult,
+};
