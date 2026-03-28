@@ -84,7 +84,12 @@ Plans:
   2. Integration tests run against fixture codebases (TypeScript project, Python project, mixed-language project) and produce correct ranked output
   3. Snapshot tests for tree renderer output catch formatting regressions — snapshots committed and passing
   4. E2E tests spin up the MCP server, connect a client, call all five tools, and verify correct responses
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Integration fixtures, createGraftServer extraction, error/logger coverage
+- [ ] 04-02-PLAN.md — Integration tests and snapshot tests (QUAL-02, QUAL-03)
+- [ ] 04-03-PLAN.md — E2E MCP tests and coverage gap closure (QUAL-01, QUAL-04)
 
 ## Progress
 
@@ -96,4 +101,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation + Parser | 6/6 | Complete   | 2026-03-28 |
 | 2. Graph + Renderer | 4/4 | Complete   | 2026-03-28 |
 | 3. CLI + MCP | 4/4 | Complete   | 2026-03-28 |
-| 4. Quality + Hardening | 0/TBD | Not started | - |
+| 4. Quality + Hardening | 0/3 | Not started | - |
