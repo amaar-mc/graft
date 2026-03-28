@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-parser/01-01-PLAN.md
-last_updated: "2026-03-28T07:31:45.369Z"
+stopped_at: Completed 01-foundation-parser/01-02-PLAN.md
+last_updated: "2026-03-28T07:36:00.884Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
+  completed_plans: 2
   percent: 20
 ---
 
@@ -51,6 +51,7 @@ Progress: [██░░░░░░░░] 20%
 
 *Updated after each plan completion*
 | Phase 01-foundation-parser P01 | 6 | 3 tasks | 19 files |
+| Phase 01-foundation-parser P02 | 2 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Init]: stderr-only logger must be created in Phase 1 before any output code — stdout contamination kills MCP sessions silently
 - [Phase 01-foundation-parser]: TypeScript pinned to 5.9.3 — TS 6.0.2 incompatible with @typescript-eslint 8.x (<6.0.0 required); jiti installed as dev dep for ESLint 10 .ts config loading
 - [Phase 01-foundation-parser]: tsup outExtension forces .cjs extension; package.json types points to dist/index.d.ts (tsup dts plugin produces .d.ts not .d.cts)
+- [Phase 01-foundation-parser]: fast-glob enumerate + ignore filter separation: fast-glob handles dirs at glob level for perf, ignore instance handles negation for correctness
+- [Phase 01-foundation-parser]: Default dirs applied at both glob level and ignore instance level — defense-in-depth ensures gitignore negation still works
 
 ### Pending Todos
 
@@ -77,6 +80,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T07:31:45.367Z
-Stopped at: Completed 01-foundation-parser/01-01-PLAN.md
+Last session: 2026-03-28T07:36:00.882Z
+Stopped at: Completed 01-foundation-parser/01-02-PLAN.md
 Resume file: None

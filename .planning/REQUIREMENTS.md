@@ -57,10 +57,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: .gitignore-aware file discovery that also skips node_modules, vendor, dist, build, .git by default
-- [ ] **INFRA-02**: Support custom ignore patterns via optional `.graftignore` or CLI flag
+- [x] **INFRA-01**: .gitignore-aware file discovery that also skips node_modules, vendor, dist, build, .git by default
+- [x] **INFRA-02**: Support custom ignore patterns via optional `.graftignore` or CLI flag
 - [ ] **INFRA-03**: Serialize parsed graph to `.graft/cache.json` for fast restart with file-hash-based invalidation
-- [ ] **INFRA-04**: Zero-config startup — works in any directory without config files
+- [x] **INFRA-04**: Zero-config startup — works in any directory without config files
 - [x] **INFRA-05**: All stdout reserved for MCP JSON-RPC when running as server; logging goes to stderr only
 - [x] **INFRA-06**: Actionable error messages that tell the user what to do, not just what failed
 
@@ -152,10 +152,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CLI-05 | Phase 3 | Pending |
 | CLI-06 | Phase 3 | Pending |
 | CLI-07 | Phase 3 | Pending |
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
+| INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 2 | Pending |
-| INFRA-04 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Complete |
 | INFRA-05 | Phase 1 | Complete |
 | INFRA-06 | Phase 1 | Complete |
 | QUAL-01 | Phase 4 | Pending |
