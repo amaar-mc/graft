@@ -231,9 +231,11 @@ async function handleGraftSummary(
   return { content: [{ type: 'text' as const, text: lines.join('\n') }] };
 }
 
-// --- MCP server entry point ---
+// --- MCP server factory ---
 
-async function startMcpServer(rootDir: string): Promise<void> {
+// Creates a fully configured McpServer with all tools and resources registered.
+// Does NOT connect a transport — callers use this for in-process testing with InMemoryTransport.
+function createGraftServer(rootDir: string): McpServer {
   const server = new McpServer({ name: 'graft', version: '0.0.1' });
 
   // Tool: graft_map
@@ -317,12 +319,20 @@ async function startMcpServer(rootDir: string): Promise<void> {
     },
   );
 
+  return server;
+}
+
+// --- MCP server entry point ---
+
+async function startMcpServer(rootDir: string): Promise<void> {
+  const server = createGraftServer(rootDir);
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }
 
 export {
   startMcpServer,
+  createGraftServer,
   buildFileContextText,
   handleGraftMap,
   handleGraftContext,
