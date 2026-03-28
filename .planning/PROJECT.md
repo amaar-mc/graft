@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Graft is an open source, local-first codebase context engine that parses any codebase into an intelligent, ranked, graph-based map and serves it to AI coding tools via MCP (Model Context Protocol). It targets AI power users — developers already using Claude Code, Cursor, Aider, or similar tools — who are frustrated that their AI assistants don't understand their codebase. Run `npx graft` in any repo, and every MCP-compatible AI tool gets deep structural and semantic context in minimal tokens.
+Graft is an open source, local-first codebase context engine that parses TypeScript/JavaScript and Python codebases into a ranked dependency graph using tree-sitter and personalized PageRank, then serves that context to AI coding tools via MCP. Run `npx graft` in any repo and every MCP-compatible AI tool gets deep structural and semantic understanding in ~2K tokens — zero config, zero cloud, nothing leaves the machine.
 
 ## Core Value
 
@@ -12,47 +12,53 @@ Any developer can run `npx graft serve` in their project and immediately give th
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Parse TypeScript/JavaScript and Python codebases into structured ASTs using tree-sitter — v1.0
+- ✓ Extract definitions (functions, classes, methods, interfaces, types) and references (usages) from source files — v1.0
+- ✓ Build a directed dependency graph from parser output (files as nodes, references as edges) — v1.0
+- ✓ Implement personalized PageRank to rank files by relevance to a given query/context — v1.0
+- ✓ Render ranked code maps in tree format within a configurable token budget — v1.0
+- ✓ Render maps in JSON format for programmatic consumption — v1.0
+- ✓ Expose `graft_map` MCP tool — v1.0
+- ✓ Expose `graft_context` MCP tool — v1.0
+- ✓ Expose `graft_search` MCP tool — v1.0
+- ✓ Expose `graft_impact` MCP tool — v1.0
+- ✓ Expose `graft_summary` MCP tool — v1.0
+- ✓ Expose MCP resources: `graft://map` and `graft://file/{path}` — v1.0
+- ✓ CLI commands: `graft map`, `graft serve`, `graft stats`, `graft impact`, `graft search` — v1.0
+- ✓ .gitignore-aware file discovery with sensible defaults — v1.0
+- ✓ Zero-config experience — works out of the box in any repo — v1.0
+- ✓ 100K LOC codebase representable in ~2K tokens of ranked context — v1.0
+- ✓ Beautiful CLI output with colors, tree-drawing characters, progress spinners — v1.0
+- ✓ Comprehensive test suite (unit, integration, snapshot, E2E) targeting >90% coverage on core modules — v1.0
 
 ### Active
 
-- [ ] Parse TypeScript/JavaScript and Python codebases into structured ASTs using tree-sitter
-- [ ] Extract definitions (functions, classes, methods, interfaces, types) and references (usages) from source files
-- [ ] Build a directed dependency graph from parser output (files as nodes, references as edges)
-- [ ] Implement personalized PageRank to rank files by relevance to a given query/context
-- [ ] Render ranked code maps in tree format (hierarchical directory + definitions) within a configurable token budget
-- [ ] Render maps in JSON format for programmatic consumption
-- [ ] Expose `graft_map` MCP tool — ranked tree map with optional query personalization and token budget
-- [ ] Expose `graft_context` MCP tool — relevant subgraph for a file or symbol
-- [ ] Expose `graft_search` MCP tool — structural search by name, kind, or pattern
-- [ ] Expose `graft_impact` MCP tool — transitive reverse dependency closure for change impact analysis
-- [ ] Expose `graft_summary` MCP tool — project overview with modules, entry points, tech stack detection
-- [ ] Expose MCP resources: `graft://map` and `graft://file/{path}`
-- [ ] CLI commands: `graft map`, `graft serve`, `graft stats`, `graft impact`, `graft search`
-- [ ] .gitignore-aware file discovery with sensible defaults (skip node_modules, vendor, dist, build)
-- [ ] Zero-config experience — works out of the box in any repo
-- [ ] 100K LOC codebase representable in ~2K tokens of ranked context
-- [ ] Beautiful CLI output with colors, tree-drawing characters, progress spinners
-- [ ] Comprehensive test suite (unit, integration, snapshot, E2E) targeting >90% coverage on core modules
+- [ ] Go language support (definitions + references extraction)
+- [ ] Rust language support (definitions + references extraction)
+- [ ] File system watcher for real-time incremental re-indexing
+- [ ] README.md with hero section, animated terminal GIF, quick start, MCP integration guides
+- [ ] npm publish configuration with `npx graft` zero-install experience
+- [ ] Performance benchmarks on real-world repos (Next.js, Express, FastAPI)
 
 ### Out of Scope
 
-- File watcher / real-time incremental re-indexing — deferred to post-v1 (Phase 6)
-- Languages beyond TypeScript/JavaScript and Python — add incrementally post-v1
-- README.md, CONTRIBUTING.md, npm publish polish — deferred to post-v1 (Phase 7)
 - External database dependencies — graph lives in memory, serialize to `.graft/cache.json`
 - GUI or web interface — CLI and MCP server only
 - Cloud/telemetry features — local-first is a hard constraint
+- Semantic vector embeddings — structural graph search covers 90% of agent use cases
+- Cypher/GraphQL query language — 5 MCP tools cover the access patterns AI agents need
 
 ## Context
 
-**Market positioning:** No standalone, tool-agnostic codebase context engine exists in the MCP ecosystem. Aider has repo-map baked in, Cursor has proprietary indexing — but nothing serves this as an open, composable tool that works with any MCP client. Graft fills this gap AND does it better than the baked-in approaches.
+**Shipped v1.0 MVP** on 2026-03-28 with 8,141 LOC TypeScript across 134 files.
+**Tech stack:** TypeScript strict, Node 18+, pnpm, tree-sitter (native with WASM fallback), Vitest, tsup (CJS output).
+**Runtime deps:** @modelcontextprotocol/sdk, zod@3, chalk@4, ora@5, commander@14, tree-sitter, fast-glob, ignore.
 
-**Developer pain:** 63% of developers say AI tools lack codebase context (Stack Overflow 2025). 66% spend time fixing "almost right" AI code. This is the #1 frustration with AI coding assistants.
+**Market positioning:** No standalone, tool-agnostic codebase context engine exists in the MCP ecosystem. Aider has repo-map baked in, Cursor has proprietary indexing — Graft fills this gap as an open, composable tool.
 
-**tree-sitter approach:** The spec calls for WASM bindings for portability with native fallback for speed. This is a best guess — research should validate the right binding strategy before implementation.
+**tree-sitter approach:** Native tree-sitter as primary, WASM fallback for portability. Validated during Phase 1 — native works on all major platforms, WASM covers edge cases.
 
-**npm package name:** `graft` may or may not be available on npm. Backup names exist if needed. Verify before Phase 7 publish.
+**npm package name:** `graft` availability needs verification before publish.
 
 ## Constraints
 
@@ -67,13 +73,16 @@ Any developer can run `npx graft serve` in their project and immediately give th
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| WASM tree-sitter bindings (primary) | Portability across platforms without native compilation | — Pending (needs research validation) |
-| In-memory graph, no external DB | Simplicity, zero dependencies; 500K files fits in memory | — Pending |
-| 4 chars ≈ 1 token approximation | Avoid tiktoken dependency; 10% accuracy is sufficient | — Pending |
-| PageRank with damping 0.85, delta < 1e-6 | Standard IR approach; personalization via query-boosted weights | — Pending |
-| TS/JS + Python for v1 languages | Most common AI-assisted languages; prove concept before expanding | — Pending |
-| Phases 1-5 = v1 ship target | Full value prop (parse → graph → render → MCP) without watcher/polish | — Pending |
-| MIT license | Maximum adoption for open source dev tooling | — Pending |
+| Native tree-sitter (primary), WASM fallback | Portability with speed where available | ✓ Good — native works on all platforms, WASM covers edge cases |
+| In-memory graph, no external DB | Simplicity, zero dependencies; 500K files fits in memory | ✓ Good — cache.json handles persistence |
+| ~3 chars/token approximation | Avoid tiktoken dependency; rough accuracy sufficient | ✓ Good — budget enforcement works correctly |
+| PageRank with damping 0.85, delta < 1e-6 | Standard IR approach; personalization via query-boosted weights | ✓ Good — dangling-node teleport redistribution solved rank sinks |
+| TS/JS + Python for v1 languages | Most common AI-assisted languages; prove concept before expanding | ✓ Good — covers majority of use cases |
+| Phases 1-4 = v1 ship target | Full value prop (parse → graph → render → MCP → quality) | ✓ Good — shipped in 2 days |
+| CJS output via tsup | `npx` compatibility — ESM chalk/ora not worth the install friction | ✓ Good — chalk@4, ora@5 pinned to CJS-compatible versions |
+| Zod pinned to v3.x | v4 crashes MCP SDK v1 at runtime | ✓ Good — no build-time signal, runtime crash avoided |
+| stderr-only logger | stdout contamination kills MCP sessions silently | ✓ Good — enforced by ESLint no-console rule |
+| MIT license | Maximum adoption for open source dev tooling | — Pending (not yet published) |
 
 ---
-*Last updated: 2026-03-27 after initialization*
+*Last updated: 2026-03-28 after v1.0 milestone*

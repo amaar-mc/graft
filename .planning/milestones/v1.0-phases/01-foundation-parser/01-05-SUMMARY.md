@@ -72,7 +72,7 @@ Each task was committed atomically:
 
 1. **Task 1: Wire CLI entry point** — `757ce37` (feat)
 
-**Plan metadata:** (docs commit — recorded after this summary)
+**Plan metadata:** `8a3593d` (docs)
 
 ## Files Created/Modified
 
@@ -104,3 +104,10 @@ None - no external service configuration required.
 ---
 *Phase: 01-foundation-parser*
 *Completed: 2026-03-28*
+
+## Self-Check: PASSED
+
+- FOUND: src/cli/index.ts
+- FOUND: .planning/phases/01-foundation-parser/01-05-SUMMARY.md
+- FOUND: commit 757ce37 (task)
+- FOUND: commit 8a3593d (metadata)
