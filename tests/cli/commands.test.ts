@@ -284,9 +284,14 @@ describe('handleImpact', () => {
 
     const result = await handleImpact(FAKE_ROOT, '/fake/root/b.ts');
 
-    // a.ts has score 0.6, b.ts has score 0.3 — a.ts should appear first
-    const aIdx = result.indexOf('a.ts');
-    const bIdx = result.indexOf('b.ts');
+    // a.ts has score 0.6, b.ts has score 0.3 — a.ts should appear before b.ts in the results list.
+    // The list section starts after the header lines; search within the list portion only.
+    // Both files appear in list lines formatted as "  a.ts [score: 0.6000]".
+    const listSection = result.split('\n').filter((line) => line.startsWith('  '));
+    const aIdx = listSection.findIndex((line) => line.includes('a.ts'));
+    const bIdx = listSection.findIndex((line) => line.includes('b.ts'));
+    expect(aIdx).toBeGreaterThanOrEqual(0);
+    expect(bIdx).toBeGreaterThanOrEqual(0);
     expect(aIdx).toBeLessThan(bIdx);
   });
 
@@ -330,8 +335,12 @@ describe('handleSearch', () => {
   it('excludes definitions not matching --kind filter', async () => {
     const result = await handleSearch(FAKE_ROOT, 'Bar', { kind: 'function' });
 
-    // 'Bar' is class kind — should be excluded when filtering by 'function'
-    expect(result).not.toContain('Bar');
+    // 'Bar' is class kind — should be excluded when filtering by 'function'.
+    // The result lines formatted as "  kind name in path:Lline" should not include class Bar.
+    // Check that no result line contains 'class' followed by 'Bar'.
+    const resultLines = result.split('\n').filter((line) => line.startsWith('  '));
+    const hasClassBar = resultLines.some((line) => line.includes('class') && line.includes('Bar'));
+    expect(hasClassBar).toBe(false);
   });
 
   it('includes kind, name, relative path, and line number in output', async () => {
