@@ -67,7 +67,13 @@ Plans:
   3. `graft://map` and `graft://file/{path}` MCP resources return valid content
   4. Total MCP tool schema serialization stays under 4,000 characters
   5. When running as MCP server, stdout carries only JSON-RPC; all logging goes to stderr — no stdout contamination
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Install Phase 3 deps and create shared indexing pipeline
+- [ ] 03-02-PLAN.md — MCP server with 5 tools and 2 resources
+- [ ] 03-03-PLAN.md — Commander CLI with all 5 subcommands
+- [ ] 03-04-PLAN.md — Schema size guard and stdout contamination tests
 
 ### Phase 4: Quality + Hardening
 **Goal**: The codebase has >90% test coverage on core modules, passes all integration and E2E tests on real repos, and is production-ready for public release
@@ -89,5 +95,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + Parser | 6/6 | Complete   | 2026-03-28 |
 | 2. Graph + Renderer | 4/4 | Complete   | 2026-03-28 |
-| 3. CLI + MCP | 0/TBD | Not started | - |
+| 3. CLI + MCP | 0/4 | Not started | - |
 | 4. Quality + Hardening | 0/TBD | Not started | - |
