@@ -62,7 +62,25 @@ export async function discoverFiles(
   if (!fs.existsSync(rootDir)) {
     throw new DiscoveryError(
       `Directory does not exist: ${rootDir}`,
-      'Check that the directory path is correct and exists',
+      'Check that the directory path is correct and exists. Use "ls" or "dir" to verify the path.',
+    );
+  }
+
+  // Check if rootDir is a directory
+  const stats = fs.statSync(rootDir);
+  if (!stats.isDirectory()) {
+    throw new DiscoveryError(
+      `Path is not a directory: ${rootDir}`,
+      'Provide a valid directory path, not a file.',
+    );
+  }
+
+  // Check for .git directory to validate it's a git repository
+  const gitDir = path.join(rootDir, '.git');
+  if (!fs.existsSync(gitDir)) {
+    throw new DiscoveryError(
+      `Not a git repository: ${rootDir}`,
+      'Run "git init" first to initialize a git repository, or run graft from the root of a git project.',
     );
   }
 
