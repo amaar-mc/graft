@@ -49,7 +49,7 @@ function relativeTime(isoTimestamp: string): string {
 
 export async function handleMap(
   rootDir: string,
-  options: { focus?: string; budget: string },
+  options: { focus?: string; budget: string; verbose?: boolean },
 ): Promise<string> {
   const spinner = ora({ text: 'Indexing...', stream: process.stderr }).start();
 
@@ -67,6 +67,25 @@ export async function handleMap(
   const output = renderTree(graph, scores, rootDir, { tokenBudget, charsPerToken: 3 });
 
   spinner.succeed(chalk.green(`Indexed ${graph.files.size} files`));
+
+  // If verbose mode is enabled, append PageRank scores to output
+  if (options.verbose) {
+    const sortedScores = Array.from(scores.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 20); // Show top 20
+    const scoreLines = [
+      '',
+      chalk.bold('PageRank Scores (top 20):'),
+      '',
+      ...sortedScores.map(([file, score]) => {
+        const relPath = path.relative(rootDir, file);
+        return `  ${chalk.cyan(relPath)} ${chalk.dim(score.toFixed(6))}`;
+      }),
+      '',
+    ];
+    return output + scoreLines.join('\n');
+  }
+
   return output;
 }
 
@@ -208,7 +227,8 @@ program
   .description('Output ranked codebase tree to stdout')
   .option('--focus <path>', 'File path for personalization')
   .option('--budget <tokens>', 'Token budget for output', '2048')
-  .action(async (options: { focus?: string; budget: string }) => {
+  .option('--verbose', 'Show PageRank scores in output')
+  .action(async (options: { focus?: string; budget: string; verbose?: boolean }) => {
     const output = await handleMap(process.cwd(), options);
     process.stdout.write(output + '\n');
   });
