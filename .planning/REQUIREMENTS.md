@@ -9,12 +9,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Parsing
 
-- [ ] **PARSE-01**: Extract definitions (functions, classes, methods, interfaces, types, exports) from TypeScript/JavaScript files using tree-sitter AST parsing
-- [ ] **PARSE-02**: Extract references (import statements, symbol usages) from TypeScript/JavaScript files to identify cross-file dependencies
-- [ ] **PARSE-03**: Extract definitions and references from Python files using tree-sitter AST parsing
-- [ ] **PARSE-04**: Handle TypeScript-specific constructs: decorators, generics, type aliases, enums, namespaces, re-exports, barrel files
-- [ ] **PARSE-05**: Handle Python-specific constructs: decorators, relative imports, `__init__.py` re-exports, dataclasses
-- [ ] **PARSE-06**: Return structured `CodeNode` objects with id, name, kind, filePath, startLine, endLine, and references
+- [x] **PARSE-01**: Extract definitions (functions, classes, methods, interfaces, types, exports) from TypeScript/JavaScript files using tree-sitter AST parsing
+- [x] **PARSE-02**: Extract references (import statements, symbol usages) from TypeScript/JavaScript files to identify cross-file dependencies
+- [x] **PARSE-03**: Extract definitions and references from Python files using tree-sitter AST parsing
+- [x] **PARSE-04**: Handle TypeScript-specific constructs: decorators, generics, type aliases, enums, namespaces, re-exports, barrel files
+- [x] **PARSE-05**: Handle Python-specific constructs: decorators, relative imports, `__init__.py` re-exports, dataclasses
+- [x] **PARSE-06**: Return structured `CodeNode` objects with id, name, kind, filePath, startLine, endLine, and references
 
 ### Graph
 
@@ -119,12 +119,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PARSE-01 | Phase 1 | Pending |
-| PARSE-02 | Phase 1 | Pending |
-| PARSE-03 | Phase 1 | Pending |
-| PARSE-04 | Phase 1 | Pending |
-| PARSE-05 | Phase 1 | Pending |
-| PARSE-06 | Phase 1 | Pending |
+| PARSE-01 | Phase 1 | Complete |
+| PARSE-02 | Phase 1 | Complete |
+| PARSE-03 | Phase 1 | Complete |
+| PARSE-04 | Phase 1 | Complete |
+| PARSE-05 | Phase 1 | Complete |
+| PARSE-06 | Phase 1 | Complete |
 | GRAPH-01 | Phase 2 | Pending |
 | GRAPH-02 | Phase 2 | Pending |
 | GRAPH-03 | Phase 2 | Pending |

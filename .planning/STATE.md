@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-parser/01-02-PLAN.md
-last_updated: "2026-03-28T07:36:00.884Z"
+stopped_at: Completed 01-foundation-parser/01-03-PLAN.md
+last_updated: "2026-03-28T07:39:45.400Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 5
-  completed_plans: 2
+  completed_plans: 3
   percent: 20
 ---
 
@@ -52,6 +52,7 @@ Progress: [██░░░░░░░░] 20%
 *Updated after each plan completion*
 | Phase 01-foundation-parser P01 | 6 | 3 tasks | 19 files |
 | Phase 01-foundation-parser P02 | 2 | 1 tasks | 2 files |
+| Phase 01-foundation-parser P03 | 5 | 4 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-parser]: tsup outExtension forces .cjs extension; package.json types points to dist/index.d.ts (tsup dts plugin produces .d.ts not .d.cts)
 - [Phase 01-foundation-parser]: fast-glob enumerate + ignore filter separation: fast-glob handles dirs at glob level for perf, ignore instance handles negation for correctness
 - [Phase 01-foundation-parser]: Default dirs applied at both glob level and ignore instance level — defense-in-depth ensures gitignore negation still works
+- [Phase 01-foundation-parser]: Two-phase extraction (tags.scm + AST walk): TypeScript tags.scm only covers function_signature/method_signature — AST walk handles function_declaration, class_declaration, type_alias_declaration, enum_declaration
+- [Phase 01-foundation-parser]: Empty Query fallback in createTagQuery(): tags.scm compilation failures degrade gracefully to pure AST walk without crashing
+- [Phase 01-foundation-parser]: Python __init__.py relative imports emit as 'export' kind to model barrel file semantics in the dependency graph
 
 ### Pending Todos
 
@@ -80,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T07:36:00.882Z
-Stopped at: Completed 01-foundation-parser/01-02-PLAN.md
+Last session: 2026-03-28T07:39:45.398Z
+Stopped at: Completed 01-foundation-parser/01-03-PLAN.md
 Resume file: None

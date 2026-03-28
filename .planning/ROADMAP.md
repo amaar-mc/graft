@@ -73,7 +73,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Parser | 2/5 | In Progress|  |
+| 1. Foundation + Parser | 3/5 | In Progress|  |
 | 2. Graph + Renderer | 0/TBD | Not started | - |
 | 3. CLI + MCP | 0/TBD | Not started | - |
 | 4. Quality + Hardening | 0/TBD | Not started | - |
