@@ -29,12 +29,17 @@
   "license": "MIT",
   "packageManager": "pnpm@10.32.1",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "chalk": "^4.1.2",
+    "commander": "^14.0.3",
     "fast-glob": "^3.3.3",
     "ignore": "^7.0.5",
+    "ora": "^5.4.1",
     "tree-sitter-javascript": "^0.25.0",
     "tree-sitter-python": "^0.25.0",
     "tree-sitter-typescript": "^0.23.2",
-    "web-tree-sitter": "^0.26.7"
+    "web-tree-sitter": "^0.26.7",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
