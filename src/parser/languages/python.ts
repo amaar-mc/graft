@@ -65,10 +65,17 @@ export async function extractPythonNodes(
 
   const nodesById = new Map<string, CodeNode>();
 
+  // Add a node, skipping if the id already exists.
   function addNode(node: CodeNode): void {
     if (!nodesById.has(node.id)) {
       nodesById.set(node.id, node);
     }
+  }
+
+  // Add a node, overriding any existing entry with the same id.
+  // Used by the AST walk to upgrade function→method when inside a class body.
+  function upsertNode(node: CodeNode): void {
+    nodesById.set(node.id, node);
   }
 
   // --- Phase 1: tags.scm query captures ---
@@ -117,7 +124,7 @@ export async function extractPythonNodes(
 
   // --- Phase 2: AST walk for constructs not covered by tags.scm ---
   const isInitFile = path.basename(filePath) === '__init__.py';
-  walkNode(rootNode, filePath, addNode, false, isInitFile);
+  walkNode(rootNode, filePath, addNode, upsertNode, false, false, isInitFile);
 
   const sorted = Array.from(nodesById.values()).sort((a, b) => a.startLine - b.startLine);
   return sorted;
@@ -132,7 +139,9 @@ function walkNode(
   node: TSNode,
   filePath: string,
   addNode: (n: CodeNode) => void,
+  upsertNode: (n: CodeNode) => void,
   insideFunction: boolean,
+  insideClass: boolean,
   isInitFile: boolean,
 ): void {
   switch (node.type) {
@@ -143,10 +152,13 @@ function walkNode(
         const startLine = node.startPosition.row + 1;
         const endLine = node.endPosition.row + 1;
         const decorators = collectDecoratorNames(node);
-        addNode({
+        // Methods are function_definitions directly inside a class body.
+        // Use upsertNode so the method kind overrides the 'function' kind set by tags.scm.
+        const kind: NodeKind = insideClass ? 'method' : 'function';
+        upsertNode({
           id: makeId(filePath, name, startLine),
           name,
-          kind: 'function',
+          kind,
           filePath,
           startLine,
           endLine,
@@ -219,33 +231,24 @@ function walkNode(
       const startLine = node.startPosition.row + 1;
       const endLine = node.endPosition.row + 1;
 
-      // Determine module path (may start with dots for relative imports)
-      let modulePath = '';
-      const moduleNode = node.childForFieldName('module_name');
-      // Count leading dots for relative imports
-      let leadingDots = '';
-      for (let i = 0; i < node.childCount; i++) {
-        const child = node.child(i);
-        if (child !== null && child.type === '.') {
-          leadingDots += '.';
-        }
-      }
-      if (moduleNode !== null) {
-        modulePath = leadingDots + nodeText(moduleNode);
-      } else {
-        modulePath = leadingDots || 'unknown';
-      }
+      // The module_name field is either dotted_name (e.g. `os`) or relative_import (e.g. `.`, `..core`, `.models`).
+      // The text of that node is already the complete module path string.
+      const moduleNameNode = node.childForFieldName('module_name');
+      const modulePath = moduleNameNode !== null ? nodeText(moduleNameNode) : 'unknown';
 
+      // Collect imported names: all namedChildren that are NOT the module_name node.
+      // In the grammar: namedChild[0] is the module, remaining namedChildren are the imported names.
+      // Imported names appear as dotted_name, identifier, aliased_import, or wildcard_import nodes.
       const importedNames: string[] = [];
 
       for (let i = 0; i < node.namedChildCount; i++) {
         const child = node.namedChild(i);
-        if (child === null) {
+        if (child === null || child === moduleNameNode) {
           continue;
         }
         if (child.type === 'wildcard_import') {
           importedNames.push('*');
-        } else if (child.type === 'identifier') {
+        } else if (child.type === 'dotted_name' || child.type === 'identifier') {
           importedNames.push(nodeText(child));
         } else if (child.type === 'aliased_import') {
           const aliasNode = child.childForFieldName('alias');
@@ -306,10 +309,15 @@ function walkNode(
     insideFunction ||
     node.type === 'function_definition';
 
+  // Track class scope so nested function_definitions are emitted as methods.
+  // Reset when entering a nested function (methods defined inside a function are plain functions).
+  const nowInsideClass =
+    !nowInsideFunction && (insideClass || node.type === 'class_definition');
+
   for (let i = 0; i < node.childCount; i++) {
     const child = node.child(i);
     if (child !== null) {
-      walkNode(child, filePath, addNode, nowInsideFunction, isInitFile);
+      walkNode(child, filePath, addNode, upsertNode, nowInsideFunction, nowInsideClass, isInitFile);
     }
   }
 }
