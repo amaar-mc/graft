@@ -29,7 +29,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Parser extracts `CodeNode` objects from Python files including decorators, relative imports, `__init__.py` re-exports, and dataclasses
   4. Custom ignore patterns work via `.graftignore` or CLI flag
   5. TypeScript strict mode enforced (no `any`, no unsafe casts), ESLint + Prettier passing, all functions have explicit return types
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [x] 01-01-PLAN.md — Project scaffold, toolchain, and infrastructure
+- [x] 01-02-PLAN.md — File discovery with gitignore and graftignore support
+- [x] 01-03-PLAN.md — Tree-sitter initialization and grammar loading
+- [x] 01-04-PLAN.md — TypeScript/JavaScript and Python AST extraction
+- [x] 01-05-PLAN.md — CLI wiring and integration tests
+- [ ] 01-06-PLAN.md — Close QUAL-06 gap: Prettier formatting + CI format:check step
 
 ### Phase 2: Graph + Renderer
 **Goal**: The codebase is representable as a ranked dependency graph and renderable as a token-budgeted tree or JSON map — 100K LOC fits in ~2K tokens
@@ -73,7 +81,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Parser | 4/5 | In Progress|  |
+| 1. Foundation + Parser | 5/6 | In Progress|  |
 | 2. Graph + Renderer | 0/TBD | Not started | - |
 | 3. CLI + MCP | 0/TBD | Not started | - |
 | 4. Quality + Hardening | 0/TBD | Not started | - |
