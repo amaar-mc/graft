@@ -24,4 +24,30 @@ function reverseDeps(graph: FileGraph, filePath: string): TraversalResult {
   return { files: edges };
 }
 
-export { forwardDeps, reverseDeps };
+// Return the transitive reverse-dependency closure of filePath.
+// BFS over reverseEdges: finds all files transitively affected if filePath changes.
+// Always includes filePath itself (even if not in the graph).
+// Uses a visited Set to handle cycles without infinite loops — O(V+E).
+function transitiveClosure(graph: FileGraph, filePath: string): TraversalResult {
+  const visited = new Set<string>();
+  const queue: string[] = [filePath];
+  visited.add(filePath);
+
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    const importers = graph.reverseEdges.get(current);
+    if (importers === undefined) {
+      continue;
+    }
+    for (const importer of importers) {
+      if (!visited.has(importer)) {
+        visited.add(importer);
+        queue.push(importer);
+      }
+    }
+  }
+
+  return { files: visited };
+}
+
+export { forwardDeps, reverseDeps, transitiveClosure };
