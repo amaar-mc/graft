@@ -58,7 +58,12 @@ export async function parseFile(filePath: string): Promise<ParseResult> {
     }
 
     const parseTimeMs = performance.now() - t0;
-    debug('Parsed file', { filePath, languageId, nodes: nodes.length, parseTimeMs: Math.round(parseTimeMs) });
+    debug('Parsed file', {
+      filePath,
+      languageId,
+      nodes: nodes.length,
+      parseTimeMs: Math.round(parseTimeMs),
+    });
 
     return { filePath, nodes, parseTimeMs };
   } catch (err) {

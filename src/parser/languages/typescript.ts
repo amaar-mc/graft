@@ -41,7 +41,11 @@ function nodeText(node: TSNode): string {
 
 // Walk a node's children collecting all identifier texts used in expressions
 function collectReferences(node: TSNode, collected: Set<string>): void {
-  if (node.type === 'identifier' || node.type === 'property_identifier' || node.type === 'type_identifier') {
+  if (
+    node.type === 'identifier' ||
+    node.type === 'property_identifier' ||
+    node.type === 'type_identifier'
+  ) {
     const name = node.text;
     if (name.length > 0) {
       collected.add(name);
@@ -340,7 +344,11 @@ function walkNode(
               endLine,
               references: [],
             });
-          } else if (name === name.toUpperCase() && name.length > 1 && /^[A-Z_][A-Z0-9_]*$/.test(name)) {
+          } else if (
+            name === name.toUpperCase() &&
+            name.length > 1 &&
+            /^[A-Z_][A-Z0-9_]*$/.test(name)
+          ) {
             // SCREAMING_SNAKE_CASE top-level constant
             addNode({
               id: makeId(filePath, name, startLine),
@@ -383,7 +391,8 @@ function walkNode(
               for (let k = 0; k < importChild.namedChildCount; k++) {
                 const specifier = importChild.namedChild(k);
                 if (specifier !== null && specifier.type === 'import_specifier') {
-                  const localName = specifier.childForFieldName('alias') ?? specifier.childForFieldName('name');
+                  const localName =
+                    specifier.childForFieldName('alias') ?? specifier.childForFieldName('name');
                   if (localName !== null) {
                     importedNames.push(nodeText(localName));
                   }

@@ -205,7 +205,8 @@ function walkNode(
         } else if (child.type === 'aliased_import') {
           const aliasNode = child.childForFieldName('alias');
           const nameNode = child.childForFieldName('name');
-          const importName = aliasNode !== null ? nodeText(aliasNode) : nameNode !== null ? nodeText(nameNode) : '';
+          const importName =
+            aliasNode !== null ? nodeText(aliasNode) : nameNode !== null ? nodeText(nameNode) : '';
           if (importName.length > 0) {
             importedNames.push(importName);
           }
@@ -253,7 +254,8 @@ function walkNode(
         } else if (child.type === 'aliased_import') {
           const aliasNode = child.childForFieldName('alias');
           const nameNode = child.childForFieldName('name');
-          const name = aliasNode !== null ? nodeText(aliasNode) : nameNode !== null ? nodeText(nameNode) : '';
+          const name =
+            aliasNode !== null ? nodeText(aliasNode) : nameNode !== null ? nodeText(nameNode) : '';
           if (name.length > 0) {
             importedNames.push(name);
           }
@@ -305,14 +307,11 @@ function walkNode(
   }
 
   // Track function scope to avoid emitting nested constants
-  const nowInsideFunction =
-    insideFunction ||
-    node.type === 'function_definition';
+  const nowInsideFunction = insideFunction || node.type === 'function_definition';
 
   // Track class scope so nested function_definitions are emitted as methods.
   // Reset when entering a nested function (methods defined inside a function are plain functions).
-  const nowInsideClass =
-    !nowInsideFunction && (insideClass || node.type === 'class_definition');
+  const nowInsideClass = !nowInsideFunction && (insideClass || node.type === 'class_definition');
 
   for (let i = 0; i < node.childCount; i++) {
     const child = node.child(i);

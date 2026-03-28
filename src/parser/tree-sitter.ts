@@ -157,14 +157,14 @@ export async function loadLanguage(languageId: LanguageId): Promise<Language> {
 }
 
 // Parse source code and return the tree-sitter Tree.
-export async function parseSource(source: string, languageId: LanguageId): Promise<import('web-tree-sitter').Tree> {
+export async function parseSource(
+  source: string,
+  languageId: LanguageId,
+): Promise<import('web-tree-sitter').Tree> {
   await initParser();
 
   if (parserInstance === null) {
-    throw new GrammarLoadError(
-      'Parser not initialized',
-      'Call initParser() before parseSource()',
-    );
+    throw new GrammarLoadError('Parser not initialized', 'Call initParser() before parseSource()');
   }
 
   const language = await loadLanguage(languageId);
