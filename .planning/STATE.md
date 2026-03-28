@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-cli-mcp/03-02-PLAN.md
-last_updated: "2026-03-28T16:52:44.008Z"
+stopped_at: Completed 03-cli-mcp/03-04-PLAN.md
+last_updated: "2026-03-28T16:57:55.053Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 14
-  completed_plans: 13
+  completed_plans: 14
   percent: 20
 ---
 
@@ -63,6 +63,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 03-cli-mcp P01 | 8 | 3 tasks | 4 files |
 | Phase 03-cli-mcp PP03 | 526025min | 1 tasks | 2 files |
 | Phase 03-cli-mcp P02 | 6 | 3 tasks | 4 files |
+| Phase 03-cli-mcp P04 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,8 @@ Recent decisions affecting current work:
 - [Phase 03-cli-mcp]: Dynamic import of startMcpServer in serve action: defers MCP SDK loading to serve-only code path
 - [Phase 03-cli-mcp]: Handler extraction for testability: each tool logic extracted to named async fn exported for unit testing — McpServer registration wraps them
 - [Phase 03-cli-mcp]: CallToolResult return type: handlers return SDK's CallToolResult type not custom interface — required for TypeScript overload resolution with server.tool()
+- [Phase 03-cli-mcp]: MCP Client + InMemoryTransport used for schema size test: gives exact JSON Schema MCP clients see
+- [Phase 03-cli-mcp]: child_process.spawn for CLI subprocess tests: byte-accurate stream separation, FORCE_COLOR=0 to suppress ANSI
 
 ### Pending Todos
 
@@ -116,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T16:52:44.006Z
-Stopped at: Completed 03-cli-mcp/03-02-PLAN.md
+Last session: 2026-03-28T16:57:55.051Z
+Stopped at: Completed 03-cli-mcp/03-04-PLAN.md
 Resume file: None

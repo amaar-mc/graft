@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + Parser** - Project scaffold, file discovery, and tree-sitter AST extraction for TS/JS and Python (completed 2026-03-28)
 - [x] **Phase 2: Graph + Renderer** - Dependency graph construction, personalized PageRank, token-budgeted rendering, and cache (completed 2026-03-28)
-- [ ] **Phase 3: CLI + MCP** - All user-facing surfaces: CLI commands and MCP server with tools and resources
+- [x] **Phase 3: CLI + MCP** - All user-facing surfaces: CLI commands and MCP server with tools and resources (completed 2026-03-28)
 - [ ] **Phase 4: Quality + Hardening** - Comprehensive test suite, integration tests on real repos, E2E MCP validation
 
 ## Phase Details
@@ -95,5 +95,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + Parser | 6/6 | Complete   | 2026-03-28 |
 | 2. Graph + Renderer | 4/4 | Complete   | 2026-03-28 |
-| 3. CLI + MCP | 3/4 | In Progress|  |
+| 3. CLI + MCP | 4/4 | Complete   | 2026-03-28 |
 | 4. Quality + Hardening | 0/TBD | Not started | - |

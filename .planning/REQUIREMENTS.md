@@ -43,7 +43,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **MCP-06**: Expose `graft_summary` tool — project overview with top-level modules, entry points, key abstractions, and detected tech stack
 - [x] **MCP-07**: Expose `graft://map` MCP resource — the full ranked tree map
 - [x] **MCP-08**: Expose `graft://file/{path}` MCP resource — contextual view of a specific file with its relationships
-- [ ] **MCP-09**: Keep total MCP tool schema serialization under 4,000 characters to minimize token overhead
+- [x] **MCP-09**: Keep total MCP tool schema serialization under 4,000 characters to minimize token overhead
 
 ### CLI
 
@@ -144,7 +144,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MCP-06 | Phase 3 | Complete |
 | MCP-07 | Phase 3 | Complete |
 | MCP-08 | Phase 3 | Complete |
-| MCP-09 | Phase 3 | Pending |
+| MCP-09 | Phase 3 | Complete |
 | CLI-01 | Phase 3 | Complete |
 | CLI-02 | Phase 3 | Complete |
 | CLI-03 | Phase 3 | Complete |
