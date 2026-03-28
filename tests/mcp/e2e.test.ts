@@ -51,6 +51,17 @@ describe('MCP E2E via InMemoryTransport', { timeout: 30000 }, () => {
     expect(text.length).toBeGreaterThan(0);
   });
 
+  it('graft_map with explicit budget exercises the params.budget defined branch', async () => {
+    // params.budget defined → exercises the non-null ?? branch (budget = params.budget, not 2048)
+    const result = await client.callTool({
+      name: 'graft_map',
+      arguments: { budget: 512 },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toContain('tokens');
+  });
+
   // ── Tool: graft_context ───────────────────────────────────────────────────────
 
   it('graft_context returns file context with Definitions and Dependencies sections', async () => {
@@ -62,6 +73,32 @@ describe('MCP E2E via InMemoryTransport', { timeout: 30000 }, () => {
     const text = (result.content[0] as { type: string; text: string }).text;
     expect(text).toContain('Definitions');
     expect(text).toContain('Dependencies');
+  });
+
+  it('graft_context for types.ts shows (none) for Dependencies (no imports)', async () => {
+    // types.ts has no imports — exercises the forward.size === 0 branch in buildFileContextText
+    const result = await client.callTool({
+      name: 'graft_context',
+      arguments: { path: 'types.ts' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toContain('Dependencies');
+    expect(text).toContain('(none)');
+  });
+
+  it('graft_context for nonexistent path shows (none) for all sections', async () => {
+    // A path not in the graph — exercises ?? 0 score fallback, defs.length === 0,
+    // forward.size === 0, and reverse.size === 0 branches all at once
+    const result = await client.callTool({
+      name: 'graft_context',
+      arguments: { path: 'nonexistent-file.ts' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toContain('Definitions');
+    expect(text).toContain('(none)');
+    expect(text).toContain('[score: 0.0000]');
   });
 
   // ── Tool: graft_search ────────────────────────────────────────────────────────
@@ -77,6 +114,41 @@ describe('MCP E2E via InMemoryTransport', { timeout: 30000 }, () => {
     expect(text).toMatch(/\d+ match/);
     const matchCount = parseInt(text.match(/^(\d+) match/)?.[1] ?? '0', 10);
     expect(matchCount).toBeGreaterThanOrEqual(1);
+  });
+
+  it('graft_search with kind filter returns filtered results', async () => {
+    // Query with kind='type' — exercises the params.kind !== undefined branch
+    const result = await client.callTool({
+      name: 'graft_search',
+      arguments: { query: 'UserId', kind: 'type' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    // 'type UserId' should match; 'interface User' should be filtered out by kind='type'
+    expect(text).toMatch(/\d+ match/);
+  });
+
+  it('graft_search returns singular "1 match" for unique exact query', async () => {
+    // 'buildUserList' is a unique function name — exactly 1 match expected
+    // Exercises the matches.length === 1 branch: "1 match" (singular, not "matches")
+    const result = await client.callTool({
+      name: 'graft_search',
+      arguments: { query: 'buildUserList' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toContain('1 match');
+  });
+
+  it('graft_search with no results returns "0 matches"', async () => {
+    // Exercises the matches.length === 0 branch → text = header only (no newline+matches)
+    const result = await client.callTool({
+      name: 'graft_search',
+      arguments: { query: 'zzznonexistentsymbol_xyz' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toBe('0 matches');
   });
 
   // ── Tool: graft_impact ────────────────────────────────────────────────────────
@@ -102,6 +174,29 @@ describe('MCP E2E via InMemoryTransport', { timeout: 30000 }, () => {
     const text = (result.content[0] as { type: string; text: string }).text;
     expect(text).toContain('Project Stats');
     expect(text).toContain('Files:');
+  });
+
+  it('graft_summary includes tech stack from package.json when present', async () => {
+    // The ts-project fixture has package.json — exercises the try-success branch in handleGraftSummary
+    const result = await client.callTool({ name: 'graft_summary', arguments: {} });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    expect(text).toContain('Tech Stack');
+    // package.json has lodash and typescript as deps — exercises deps.length > 0 branch
+    expect(text).toContain('lodash');
+  });
+
+  it('graft_impact for index.ts (no dependents) returns singular "1 file affected"', async () => {
+    // index.ts is not imported by any other file in the fixture — transitive closure = {index.ts}
+    // Exercises the lines.length === 1 branch: "1 file affected" (singular, not "files")
+    const result = await client.callTool({
+      name: 'graft_impact',
+      arguments: { path: 'index.ts' },
+    });
+    expect(result.isError).toBeFalsy();
+    const text = (result.content[0] as { type: string; text: string }).text;
+    // Verify it's singular "file" not plural "files"
+    expect(text).toMatch(/^1 file affected/);
   });
 
   // ── Resource: graft://map ─────────────────────────────────────────────────────
