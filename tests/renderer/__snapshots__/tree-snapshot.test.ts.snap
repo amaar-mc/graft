@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`tree renderer snapshots > renders empty graph 1`] = `"[~0 tokens]"`;
+
+exports[`tree renderer snapshots > renders graph with only headers (no definitions) 1`] = `
+"src/a.ts [score: 0.6000]
+src/b.ts [score: 0.2500]
+src/c.ts [score: 0.1500]
+[~25 tokens]"
+`;
+
+exports[`tree renderer snapshots > renders single-file graph 1`] = `
+"src/main.ts [score: 1.0000]
+  function bootstrap (L1)
+  interface AppConfig (L17)
+  constant VERSION (L27)
+[~36 tokens]"
+`;
+
+exports[`tree renderer snapshots > renders standard 3-file graph 1`] = `
+"src/a.ts [score: 0.5000]
+  function doWork (L5)
+  class MyClass (L25)
+src/b.ts [score: 0.3000]
+  function helper (L2)
+src/c.ts [score: 0.1000]
+  interface Config (L1)
+[~56 tokens]"
+`;
+
+exports[`tree renderer snapshots > renders with tight budget that truncates 1`] = `
+"src/a.ts [score: 0.5000]
+  function doWork (L1)
+[~16 tokens]"
+`;
