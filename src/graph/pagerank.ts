@@ -49,10 +49,7 @@ function buildTeleportVector(
 // Files with many importers (high in-degree) score higher than leaf files.
 // Dangling nodes (no outgoing edges) redistribute rank uniformly via the teleport vector
 // rather than concentrating it, preventing rank sinks.
-function computePageRank(
-  graph: FileGraph,
-  options: PageRankOptions,
-): PageRankResult {
+function computePageRank(graph: FileGraph, options: PageRankOptions): PageRankResult {
   const nodes = Array.from(graph.files);
   const N = nodes.length;
 
@@ -113,10 +110,7 @@ function computePageRank(
 
       // Power iteration formula with dangling redistribution:
       // score(v) = alpha * (linkRank(v) + danglingSum * teleport(v)) + (1 - alpha) * teleport(v)
-      newScores.set(
-        node,
-        alpha * (linkRank + danglingSum * tv) + (1 - alpha) * tv,
-      );
+      newScores.set(node, alpha * (linkRank + danglingSum * tv) + (1 - alpha) * tv);
     }
 
     // Compute L1 delta between new and old scores to check convergence.

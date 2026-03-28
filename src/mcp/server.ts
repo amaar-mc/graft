@@ -111,7 +111,10 @@ async function handleGraftMap(params: MapParams, rootDir: string): Promise<Conte
   if (params.query !== undefined) {
     const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.query));
     if (absPath === null) {
-      return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+      return {
+        content: [{ type: 'text' as const, text: 'Error: path is outside project root' }],
+        isError: true,
+      };
     }
     personalization = new Map([[absPath, 10.0]]);
   }
@@ -123,13 +126,13 @@ async function handleGraftMap(params: MapParams, rootDir: string): Promise<Conte
   return { content: [{ type: 'text' as const, text }] };
 }
 
-async function handleGraftContext(
-  params: PathParam,
-  rootDir: string,
-): Promise<ContentResponse> {
+async function handleGraftContext(params: PathParam, rootDir: string): Promise<ContentResponse> {
   const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.path));
   if (absPath === null) {
-    return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+    return {
+      content: [{ type: 'text' as const, text: 'Error: path is outside project root' }],
+      isError: true,
+    };
   }
   const { graph, scores } = await buildIndex(rootDir);
   const text = buildFileContextText(graph, scores, rootDir, absPath);
@@ -165,7 +168,10 @@ async function handleGraftSearch(params: SearchParams, rootDir: string): Promise
 async function handleGraftImpact(params: PathParam, rootDir: string): Promise<ContentResponse> {
   const absPath = validateProjectPath(rootDir, path.resolve(rootDir, params.path));
   if (absPath === null) {
-    return { content: [{ type: 'text' as const, text: 'Error: path is outside project root' }], isError: true };
+    return {
+      content: [{ type: 'text' as const, text: 'Error: path is outside project root' }],
+      isError: true,
+    };
   }
   const { graph, scores } = await buildIndex(rootDir);
   const closure = transitiveClosure(graph, absPath);
@@ -264,13 +270,7 @@ function createGraftServer(rootDir: string): McpServer {
     'Ranked tree map of the codebase by structural importance.',
     {
       query: z.string().max(500).optional().describe('File or symbol for personalization'),
-      budget: z
-        .number()
-        .int()
-        .min(1)
-        .max(32000)
-        .optional()
-        .describe('Max tokens (default 2048)'),
+      budget: z.number().int().min(1).max(32000).optional().describe('Max tokens (default 2048)'),
     },
     async (params) => handleGraftMap(params, rootDir),
   );
@@ -335,7 +335,11 @@ function createGraftServer(rootDir: string): McpServer {
       const rawPath = Array.isArray(filePath) ? filePath[0] : filePath;
       const absPath = validateProjectPath(rootDir, path.resolve(rootDir, rawPath as string));
       if (absPath === null) {
-        return { contents: [{ uri: uri.href, text: 'Error: path is outside project root', mimeType: 'text/plain' }] };
+        return {
+          contents: [
+            { uri: uri.href, text: 'Error: path is outside project root', mimeType: 'text/plain' },
+          ],
+        };
       }
       const { graph, scores } = await buildIndex(rootDir);
       const text = buildFileContextText(graph, scores, rootDir, absPath);

@@ -62,7 +62,11 @@ export async function handleMap(
   const { graph, scores } = await buildIndex(rootDir, personalization);
   const tokenBudget = parseInt(options.budget, 10);
   if (Number.isNaN(tokenBudget) || tokenBudget < 1) {
-    throw new GraftError('Invalid budget value', 'Provide a positive integer for --budget', 'INVALID_INPUT');
+    throw new GraftError(
+      'Invalid budget value',
+      'Provide a positive integer for --budget',
+      'INVALID_INPUT',
+    );
   }
   const output = renderTree(graph, scores, rootDir, { tokenBudget, charsPerToken: 3 });
 
@@ -93,9 +97,7 @@ export async function handleStats(rootDir: string): Promise<string> {
 
   const cache = await readCache(rootDir);
   const cacheAge =
-    cache !== null && cache.createdAt !== undefined
-      ? relativeTime(cache.createdAt)
-      : 'No cache';
+    cache !== null && cache.createdAt !== undefined ? relativeTime(cache.createdAt) : 'No cache';
 
   spinner.succeed(chalk.green('Stats computed'));
 

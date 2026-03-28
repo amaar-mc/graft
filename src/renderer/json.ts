@@ -2,10 +2,7 @@
 // Produces a score-sorted JSON document with graph structure, scores, and metadata.
 
 import path from 'path';
-import type {
-  FileGraph,
-  JsonRendererOptions,
-} from '../graph/types.js';
+import type { FileGraph, JsonRendererOptions } from '../graph/types.js';
 import type { NodeKind } from '../parser/types.js';
 
 // Kinds excluded from rendered output — import/export are structural noise.

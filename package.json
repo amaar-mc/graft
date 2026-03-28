@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/amaar-mc/graft#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "files": [
     "dist",
