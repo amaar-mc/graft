@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-graph-renderer/02-02-PLAN.md
-last_updated: "2026-03-28T08:28:23.922Z"
+stopped_at: Completed 02-graph-renderer/02-01-PLAN.md
+last_updated: "2026-03-28T08:30:06.061Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 10
-  completed_plans: 7
+  completed_plans: 8
   percent: 20
 ---
 
@@ -57,6 +57,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 01-foundation-parser P04 | 5 | 3 tasks | 5 files |
 | Phase 01-foundation-parser P06 | 1 | 3 tasks | 5 files |
 | Phase 02-graph-renderer P02 | 3 | 2 tasks | 4 files |
+| Phase 02-graph-renderer P01 | 4 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-parser]: Format:check wired into CI after Lint, before Test — early fail on cheap checks before expensive test runs
 - [Phase 02-graph-renderer]: Dangling-node rank redistributed via teleport vector — prevents rank sinks and keeps scores summing to 1.0
 - [Phase 02-graph-renderer]: buildTeleportVector normalizes caller weights internally; falls back to uniform for zero or unknown seeds
+- [Phase 02-graph-renderer]: FileGraph uses ReadonlySet/ReadonlyMap for immutable public surface — mutable Map<string, Set<string>> internally, cast at return boundary
+- [Phase 02-graph-renderer]: resolveImportPath silently drops non-relative refs (npm packages, builtins) — no error, no edge
+- [Phase 02-graph-renderer]: forwardDeps/reverseDeps are thin wrappers establishing the named public API contract for Phase 3 CLI/MCP
 
 ### Pending Todos
 
@@ -96,6 +100,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T08:28:23.920Z
-Stopped at: Completed 02-graph-renderer/02-02-PLAN.md
+Last session: 2026-03-28T08:30:06.059Z
+Stopped at: Completed 02-graph-renderer/02-01-PLAN.md
 Resume file: None

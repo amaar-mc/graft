@@ -18,11 +18,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Graph
 
-- [ ] **GRAPH-01**: Build a directed dependency graph from parser output with files as nodes and import references as weighted edges
+- [x] **GRAPH-01**: Build a directed dependency graph from parser output with files as nodes and import references as weighted edges
 - [x] **GRAPH-02**: Implement PageRank with power iteration (damping 0.85, convergence delta < 1e-6, max 100 iterations) to rank files by structural importance
 - [x] **GRAPH-03**: Implement personalized PageRank where files matching a query/context receive boosted seed weights
-- [ ] **GRAPH-04**: Support dependency queries: "what does file X depend on?" (forward edges)
-- [ ] **GRAPH-05**: Support reverse dependency queries: "what depends on file X?" (reverse edges)
+- [x] **GRAPH-04**: Support dependency queries: "what does file X depend on?" (forward edges)
+- [x] **GRAPH-05**: Support reverse dependency queries: "what depends on file X?" (reverse edges)
 - [ ] **GRAPH-06**: Compute transitive reverse-dependency closure for impact analysis ("if I change X, what is affected?")
 
 ### Rendering
@@ -125,11 +125,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PARSE-04 | Phase 1 | Complete |
 | PARSE-05 | Phase 1 | Complete |
 | PARSE-06 | Phase 1 | Complete |
-| GRAPH-01 | Phase 2 | Pending |
+| GRAPH-01 | Phase 2 | Complete |
 | GRAPH-02 | Phase 2 | Complete |
 | GRAPH-03 | Phase 2 | Complete |
-| GRAPH-04 | Phase 2 | Pending |
-| GRAPH-05 | Phase 2 | Pending |
+| GRAPH-04 | Phase 2 | Complete |
+| GRAPH-05 | Phase 2 | Complete |
 | GRAPH-06 | Phase 2 | Pending |
 | REND-01 | Phase 2 | Pending |
 | REND-02 | Phase 2 | Pending |
