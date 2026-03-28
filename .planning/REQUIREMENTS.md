@@ -61,8 +61,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **INFRA-02**: Support custom ignore patterns via optional `.graftignore` or CLI flag
 - [ ] **INFRA-03**: Serialize parsed graph to `.graft/cache.json` for fast restart with file-hash-based invalidation
 - [ ] **INFRA-04**: Zero-config startup — works in any directory without config files
-- [ ] **INFRA-05**: All stdout reserved for MCP JSON-RPC when running as server; logging goes to stderr only
-- [ ] **INFRA-06**: Actionable error messages that tell the user what to do, not just what failed
+- [x] **INFRA-05**: All stdout reserved for MCP JSON-RPC when running as server; logging goes to stderr only
+- [x] **INFRA-06**: Actionable error messages that tell the user what to do, not just what failed
 
 ### Quality
 
@@ -70,8 +70,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **QUAL-02**: Integration tests with fixture codebases (TypeScript project, Python project, mixed-language project)
 - [ ] **QUAL-03**: Snapshot tests for tree renderer output to catch formatting regressions
 - [ ] **QUAL-04**: E2E tests that spin up the MCP server, connect a client, call tools, and verify responses
-- [ ] **QUAL-05**: Strict TypeScript — no `any`, no unsafe `as` casts, all functions have explicit return types
-- [ ] **QUAL-06**: ESLint + Prettier enforced, CI pipeline with GitHub Actions
+- [x] **QUAL-05**: Strict TypeScript — no `any`, no unsafe `as` casts, all functions have explicit return types
+- [x] **QUAL-06**: ESLint + Prettier enforced, CI pipeline with GitHub Actions
 
 ## v2 Requirements
 
@@ -156,14 +156,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-02 | Phase 1 | Pending |
 | INFRA-03 | Phase 2 | Pending |
 | INFRA-04 | Phase 1 | Pending |
-| INFRA-05 | Phase 1 | Pending |
-| INFRA-06 | Phase 1 | Pending |
+| INFRA-05 | Phase 1 | Complete |
+| INFRA-06 | Phase 1 | Complete |
 | QUAL-01 | Phase 4 | Pending |
 | QUAL-02 | Phase 4 | Pending |
 | QUAL-03 | Phase 4 | Pending |
 | QUAL-04 | Phase 4 | Pending |
-| QUAL-05 | Phase 1 | Pending |
-| QUAL-06 | Phase 1 | Pending |
+| QUAL-05 | Phase 1 | Complete |
+| QUAL-06 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 45 total
