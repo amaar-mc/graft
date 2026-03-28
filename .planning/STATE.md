@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-quality-hardening/04-01-PLAN.md
-last_updated: "2026-03-28T17:47:47.887Z"
+stopped_at: Completed 04-quality-hardening/04-02-PLAN.md
+last_updated: "2026-03-28T17:57:41.950Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 17
-  completed_plans: 15
+  completed_plans: 16
   percent: 20
 ---
 
@@ -65,6 +65,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 03-cli-mcp P02 | 6 | 3 tasks | 4 files |
 | Phase 03-cli-mcp P04 | 3 | 2 tasks | 2 files |
 | Phase 04-quality-hardening P01 | 2 | 2 tasks | 13 files |
+| Phase 04-quality-hardening PP02 | 8 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,8 @@ Recent decisions affecting current work:
 - [Phase 03-cli-mcp]: child_process.spawn for CLI subprocess tests: byte-accurate stream separation, FORCE_COLOR=0 to suppress ANSI
 - [Phase 04-quality-hardening]: createGraftServer returns McpServer without transport — Option B from research; zero production API change
 - [Phase 04-quality-hardening]: Mixed-project fixture uses two separate clusters (TS + Python) to assert no cross-language edges per research pitfall 5
+- [Phase 04-quality-hardening]: buildGraph reads node.name (not node.references) for import/export module paths — all parsers consistently store module path in name field
+- [Phase 04-quality-hardening]: Snapshot budget=20 tokens (charBudget=60) demonstrates truncation with fileA included but fileB excluded
 
 ### Pending Todos
 
@@ -122,6 +125,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T17:47:47.884Z
-Stopped at: Completed 04-quality-hardening/04-01-PLAN.md
+Last session: 2026-03-28T17:57:41.948Z
+Stopped at: Completed 04-quality-hardening/04-02-PLAN.md
 Resume file: None

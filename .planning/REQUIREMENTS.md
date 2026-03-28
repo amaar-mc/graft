@@ -68,7 +68,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **QUAL-01**: Unit tests for every module (parser, graph, renderer, MCP tools) with >90% coverage on core modules
 - [x] **QUAL-02**: Integration tests with fixture codebases (TypeScript project, Python project, mixed-language project)
-- [ ] **QUAL-03**: Snapshot tests for tree renderer output to catch formatting regressions
+- [x] **QUAL-03**: Snapshot tests for tree renderer output to catch formatting regressions
 - [x] **QUAL-04**: E2E tests that spin up the MCP server, connect a client, call tools, and verify responses
 - [x] **QUAL-05**: Strict TypeScript — no `any`, no unsafe `as` casts, all functions have explicit return types
 - [x] **QUAL-06**: ESLint + Prettier enforced, CI pipeline with GitHub Actions
@@ -160,7 +160,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-06 | Phase 1 | Complete |
 | QUAL-01 | Phase 4 | Complete |
 | QUAL-02 | Phase 4 | Complete |
-| QUAL-03 | Phase 4 | Pending |
+| QUAL-03 | Phase 4 | Complete |
 | QUAL-04 | Phase 4 | Complete |
 | QUAL-05 | Phase 1 | Complete |
 | QUAL-06 | Phase 1 | Complete |
