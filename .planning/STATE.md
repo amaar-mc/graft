@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-parser/01-06-PLAN.md
-last_updated: "2026-03-28T08:03:04.878Z"
+stopped_at: Completed 02-graph-renderer/02-02-PLAN.md
+last_updated: "2026-03-28T08:28:23.922Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 10
+  completed_plans: 7
   percent: 20
 ---
 
@@ -56,6 +56,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 01-foundation-parser P05 | 2 | 1 tasks | 1 files |
 | Phase 01-foundation-parser P04 | 5 | 3 tasks | 5 files |
 | Phase 01-foundation-parser P06 | 1 | 3 tasks | 5 files |
+| Phase 02-graph-renderer P02 | 3 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-parser]: import_from_statement uses module_name field text directly for module path — relative_import node already contains complete path string
 - [Phase 01-foundation-parser]: Python imported names collected via dotted_name namedChildren (not identifier type) — matches actual tree-sitter Python grammar structure
 - [Phase 01-foundation-parser]: Format:check wired into CI after Lint, before Test — early fail on cheap checks before expensive test runs
+- [Phase 02-graph-renderer]: Dangling-node rank redistributed via teleport vector — prevents rank sinks and keeps scores summing to 1.0
+- [Phase 02-graph-renderer]: buildTeleportVector normalizes caller weights internally; falls back to uniform for zero or unknown seeds
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T08:00:38.247Z
-Stopped at: Completed 01-foundation-parser/01-06-PLAN.md
+Last session: 2026-03-28T08:28:23.920Z
+Stopped at: Completed 02-graph-renderer/02-02-PLAN.md
 Resume file: None
