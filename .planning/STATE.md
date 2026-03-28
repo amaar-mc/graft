@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-parser/01-05-PLAN.md
-last_updated: "2026-03-28T07:42:43.005Z"
+stopped_at: Completed 01-foundation-parser/01-04-PLAN.md
+last_updated: "2026-03-28T07:47:58.379Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
   percent: 20
 ---
 
@@ -54,6 +54,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 01-foundation-parser P02 | 2 | 1 tasks | 2 files |
 | Phase 01-foundation-parser P03 | 5 | 4 tasks | 4 files |
 | Phase 01-foundation-parser P05 | 2 | 1 tasks | 1 files |
+| Phase 01-foundation-parser P04 | 5 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-parser]: Python __init__.py relative imports emit as 'export' kind to model barrel file semantics in the dependency graph
 - [Phase 01-foundation-parser]: stderr-only output enforced at CLI layer — stdout contamination would break future MCP sessions
 - [Phase 01-foundation-parser]: Minimal Phase 1 CLI: no commander/colors/spinners — proves pipeline works; polish deferred to Phase 3
+- [Phase 01-foundation-parser]: Python methods emit 'method' kind via upsertNode override with insideClass tracking — tags.scm Python grammar has no definition.method, AST walk must override Phase 1 results
+- [Phase 01-foundation-parser]: import_from_statement uses module_name field text directly for module path — relative_import node already contains complete path string
+- [Phase 01-foundation-parser]: Python imported names collected via dotted_name namedChildren (not identifier type) — matches actual tree-sitter Python grammar structure
 
 ### Pending Todos
 
@@ -87,6 +91,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T07:42:43.003Z
-Stopped at: Completed 01-foundation-parser/01-05-PLAN.md
+Last session: 2026-03-28T07:47:58.376Z
+Stopped at: Completed 01-foundation-parser/01-04-PLAN.md
 Resume file: None
