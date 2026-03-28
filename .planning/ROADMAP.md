@@ -37,7 +37,7 @@ Plans:
 - [x] 01-03-PLAN.md — Tree-sitter initialization and grammar loading
 - [x] 01-04-PLAN.md — TypeScript/JavaScript and Python AST extraction
 - [x] 01-05-PLAN.md — CLI wiring and integration tests
-- [ ] 01-06-PLAN.md — Close QUAL-06 gap: Prettier formatting + CI format:check step
+- [x] 01-06-PLAN.md — Close QUAL-06 gap: Prettier formatting + CI format:check step
 
 ### Phase 2: Graph + Renderer
 **Goal**: The codebase is representable as a ranked dependency graph and renderable as a token-budgeted tree or JSON map — 100K LOC fits in ~2K tokens
@@ -49,7 +49,13 @@ Plans:
   3. Ranked tree output fits a configurable token budget (default 2048); highest-ranked files appear first and token count is displayed
   4. JSON output contains graph structure, scores, and metadata for programmatic consumption
   5. Cache at `.graft/cache.json` uses filesystem fingerprint (path + size + mtime hash) for invalidation; stale cache is never served silently
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Graph types, dependency graph builder, forward/reverse queries
+- [ ] 02-02-PLAN.md — Standard and personalized PageRank engine (TDD)
+- [ ] 02-03-PLAN.md — Transitive closure, tree renderer, JSON renderer
+- [ ] 02-04-PLAN.md — Filesystem cache with mtime+size fingerprinting
 
 ### Phase 3: CLI + MCP
 **Goal**: Developers can use all CLI commands and any MCP-compatible AI tool can call all five Graft tools and two resources to get ranked codebase context
@@ -82,6 +88,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Parser | 6/6 | Complete   | 2026-03-28 |
-| 2. Graph + Renderer | 0/TBD | Not started | - |
+| 2. Graph + Renderer | 0/4 | Planning complete | - |
 | 3. CLI + MCP | 0/TBD | Not started | - |
 | 4. Quality + Hardening | 0/TBD | Not started | - |
