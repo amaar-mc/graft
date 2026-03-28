@@ -35,4 +35,11 @@ class GrammarLoadError extends GraftError {
   }
 }
 
-export { GraftError, ParseError, DiscoveryError, GrammarLoadError };
+class CacheError extends GraftError {
+  constructor(message: string, hint: string) {
+    super(message, hint, 'CACHE_ERROR');
+    this.name = 'CacheError';
+  }
+}
+
+export { GraftError, ParseError, DiscoveryError, GrammarLoadError, CacheError };
