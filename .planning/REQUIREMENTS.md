@@ -23,15 +23,15 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **GRAPH-03**: Implement personalized PageRank where files matching a query/context receive boosted seed weights
 - [x] **GRAPH-04**: Support dependency queries: "what does file X depend on?" (forward edges)
 - [x] **GRAPH-05**: Support reverse dependency queries: "what depends on file X?" (reverse edges)
-- [ ] **GRAPH-06**: Compute transitive reverse-dependency closure for impact analysis ("if I change X, what is affected?")
+- [x] **GRAPH-06**: Compute transitive reverse-dependency closure for impact analysis ("if I change X, what is affected?")
 
 ### Rendering
 
-- [ ] **REND-01**: Render ranked files as a hierarchical directory tree with indented definitions, sorted by PageRank score
-- [ ] **REND-02**: Enforce configurable token budget (default: 2048 tokens) using ~3 chars/token approximation for tree output
-- [ ] **REND-03**: Greedily fill token budget by PageRank rank — highest-ranked files and definitions appear first
-- [ ] **REND-04**: Render maps in JSON format with graph structure, scores, and metadata for programmatic consumption
-- [ ] **REND-05**: Token count display on all rendered output
+- [x] **REND-01**: Render ranked files as a hierarchical directory tree with indented definitions, sorted by PageRank score
+- [x] **REND-02**: Enforce configurable token budget (default: 2048 tokens) using ~3 chars/token approximation for tree output
+- [x] **REND-03**: Greedily fill token budget by PageRank rank — highest-ranked files and definitions appear first
+- [x] **REND-04**: Render maps in JSON format with graph structure, scores, and metadata for programmatic consumption
+- [x] **REND-05**: Token count display on all rendered output
 
 ### MCP Server
 
@@ -130,12 +130,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GRAPH-03 | Phase 2 | Complete |
 | GRAPH-04 | Phase 2 | Complete |
 | GRAPH-05 | Phase 2 | Complete |
-| GRAPH-06 | Phase 2 | Pending |
-| REND-01 | Phase 2 | Pending |
-| REND-02 | Phase 2 | Pending |
-| REND-03 | Phase 2 | Pending |
-| REND-04 | Phase 2 | Pending |
-| REND-05 | Phase 2 | Pending |
+| GRAPH-06 | Phase 2 | Complete |
+| REND-01 | Phase 2 | Complete |
+| REND-02 | Phase 2 | Complete |
+| REND-03 | Phase 2 | Complete |
+| REND-04 | Phase 2 | Complete |
+| REND-05 | Phase 2 | Complete |
 | MCP-01 | Phase 3 | Pending |
 | MCP-02 | Phase 3 | Pending |
 | MCP-03 | Phase 3 | Pending |

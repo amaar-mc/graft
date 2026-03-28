@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-graph-renderer/02-04-PLAN.md
-last_updated: "2026-03-28T08:34:15.309Z"
+stopped_at: Completed 02-graph-renderer/02-03-PLAN.md
+last_updated: "2026-03-28T08:35:40.668Z"
 last_activity: 2026-03-27 — Roadmap created, all 45 v1 requirements mapped to 4 phases
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 10
-  completed_plans: 9
+  completed_plans: 10
   percent: 20
 ---
 
@@ -59,6 +59,7 @@ Progress: [██░░░░░░░░] 20%
 | Phase 02-graph-renderer P02 | 3 | 2 tasks | 4 files |
 | Phase 02-graph-renderer P01 | 4 | 2 tasks | 5 files |
 | Phase 02-graph-renderer P04 | 2 | 1 tasks | 3 files |
+| Phase 02-graph-renderer P03 | 4 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,9 @@ Recent decisions affecting current work:
 - [Phase 02-graph-renderer]: resolveImportPath silently drops non-relative refs (npm packages, builtins) — no error, no edge
 - [Phase 02-graph-renderer]: forwardDeps/reverseDeps are thin wrappers establishing the named public API contract for Phase 3 CLI/MCP
 - [Phase 02-graph-renderer]: mtime+size fingerprint chosen over content hash — O(1) stat vs O(n) read; no new runtime deps; relative paths in cache for cross-machine portability
+- [Phase 02-graph-renderer]: transitiveClosure always includes seed file itself — callers never need special-case unknown handling
+- [Phase 02-graph-renderer]: Budget enforcement breaks at first overflow block — partial blocks never emitted, output is always coherent
+- [Phase 02-graph-renderer]: tokenCount in JSON computed from preliminary serialization — approximation avoids circular dependency
 
 ### Pending Todos
 
@@ -102,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T08:34:15.305Z
-Stopped at: Completed 02-graph-renderer/02-04-PLAN.md
+Last session: 2026-03-28T08:35:40.666Z
+Stopped at: Completed 02-graph-renderer/02-03-PLAN.md
 Resume file: None
